@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15  # Use the latest stable PostgreSQL image
+    container_name: alliant-db-instance
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: passowrd001
+      POSTGRES_DB: alliant-db
+    ports:
+      - "5436:5432"  # Map the container's port 5432 to your host's port 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Mount a named volume for persistent storage
+
+volumes:
+  pgdata:
