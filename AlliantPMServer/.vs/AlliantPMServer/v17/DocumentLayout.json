@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B826C808-A55D-4FB5-9C64-A450BCB3BEFC}|Solution Items{B826C808-A55D-4FB5-9C64-A450BCB3BEFC}|C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{B826C808-A55D-4FB5-9C64-A450BCB3BEFC}|Solution Items{B826C808-A55D-4FB5-9C64-A450BCB3BEFC}|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9CEAB6AE-8F0E-471A-8DCD-99153E23DAA3}|AlliantPMServer.Domain\\AlliantPMServer.Domain.csproj|c:\\users\\am004289\\desktop\\projects-p\\alliant-product-management\\alliantpmserver\\alliantpmserver.domain\\entities\\products\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9CEAB6AE-8F0E-471A-8DCD-99153E23DAA3}|AlliantPMServer.Domain\\AlliantPMServer.Domain.csproj|solutionrelative:alliantpmserver.domain\\entities\\products\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,11 +30,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-17T19:38:13.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ProductCategory.cs",
               "DocumentMoniker": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\AlliantPMServer.Domain\\Entities\\Products\\ProductCategory.cs",
               "RelativeDocumentMoniker": "AlliantPMServer.Domain\\Entities\\Products\\ProductCategory.cs",
@@ -38,12 +55,11 @@
               "RelativeToolTip": "AlliantPMServer.Domain\\Entities\\Products\\ProductCategory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T19:31:24.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-17T19:31:24.287Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\AlliantPMServer.Domain\\Entities\\Products\\Product.cs",
               "RelativeDocumentMoniker": "AlliantPMServer.Domain\\Entities\\Products\\Product.cs",
@@ -56,7 +72,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Customer.cs",
               "DocumentMoniker": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\AlliantPMServer.Domain\\Entities\\Customers\\Customer.cs",
               "RelativeDocumentMoniker": "AlliantPMServer.Domain\\Entities\\Customers\\Customer.cs",
@@ -64,12 +80,11 @@
               "RelativeToolTip": "AlliantPMServer.Domain\\Entities\\Customers\\Customer.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T19:27:47.478Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-17T19:27:47.478Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CoreEntity.cs",
               "DocumentMoniker": "C:\\Users\\am004289\\Desktop\\projects-p\\alliant-product-management\\AlliantPMServer\\AlliantPMServer.Domain\\Entities\\Core\\CoreEntity.cs",
               "RelativeDocumentMoniker": "AlliantPMServer.Domain\\Entities\\Core\\CoreEntity.cs",
@@ -77,8 +92,7 @@
               "RelativeToolTip": "AlliantPMServer.Domain\\Entities\\Core\\CoreEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T19:24:21.476Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-17T19:24:21.476Z"
             }
           ]
         }

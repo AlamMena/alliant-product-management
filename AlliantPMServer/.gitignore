@@ -41,7 +41,7 @@ global.json
 *.tlog
 *.log
 *.vspscc
-.vs/
+
 _ReSharper*/
 *.[pP]ublish/
 
