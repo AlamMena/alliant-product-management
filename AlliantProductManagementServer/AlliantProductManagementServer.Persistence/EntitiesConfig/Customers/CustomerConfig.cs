@@ -17,6 +17,7 @@ namespace AlliantProductManagementServer.Persistence.EntitiesConfig.Customers
             builder.Property(x => x.Name).HasMaxLength(60);
             builder.Property(x => x.LastName).HasMaxLength(60);
             builder.Property(x => x.Identification).HasMaxLength(30);
+            builder.HasMany(x => x.Products).WithMany(x => x.Customers);
             builder.HasQueryFilter(d => !d.IsDeleted);
         }
     }
