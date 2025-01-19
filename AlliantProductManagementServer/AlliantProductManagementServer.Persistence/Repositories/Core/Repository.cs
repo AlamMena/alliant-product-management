@@ -115,6 +115,7 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Core
             try
             {
                 return await Entities
+                    .OrderBy(d => d.Id)
                     .Skip(limit * (page - 1))
                     .Take(limit)
                     .ToListAsync();
