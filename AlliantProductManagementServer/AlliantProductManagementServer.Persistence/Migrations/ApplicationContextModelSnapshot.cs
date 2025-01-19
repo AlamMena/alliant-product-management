@@ -69,7 +69,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Products.Product", b =>
@@ -115,7 +115,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Products.ProductCategory", b =>
@@ -154,7 +154,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategory");
+                    b.ToTable("ProductCategory", (string)null);
                 });
 
             modelBuilder.Entity("CustomerProduct", b =>
@@ -169,7 +169,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("CustomerProduct");
+                    b.ToTable("CustomerProduct", (string)null);
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Products.Product", b =>
