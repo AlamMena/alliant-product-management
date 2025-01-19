@@ -1,4 +1,5 @@
-﻿using AlliantProductManagementServer.Application.Features.Clients.Handlers;
+﻿using AlliantProductManagementServer.Application.Dtos.Customers;
+using AlliantProductManagementServer.Application.Features.Clients.Handlers;
 using AlliantProductManagementServer.Domain.Entities.Customers;
 using AutoMapper;
 using System;
@@ -14,6 +15,8 @@ namespace AlliantProductManagementServer.Application.Mappings.Customers
         public CustomerProfile()
         {
             CreateMap<CreateCustomerCommand, Customer>();
+            CreateMap<Customer, CustomerDto>();
+
         }
     }
 }

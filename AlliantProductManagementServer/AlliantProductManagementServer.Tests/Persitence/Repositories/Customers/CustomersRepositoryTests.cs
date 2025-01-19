@@ -22,7 +22,7 @@ namespace AlliantProductManagementServer.Tests.Persitence.Repositories.Customers
             {
                 Name = "Alam",
                 LastName = "Mena",
-                Phone = "829-794-8271",
+                PhoneNumber = "829-794-8271",
                 Identification = "401-1389763-6"
             });
 
