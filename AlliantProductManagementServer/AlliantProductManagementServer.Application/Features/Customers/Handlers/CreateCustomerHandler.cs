@@ -1,5 +1,6 @@
 ﻿using AlliantProductManagementServer.Application.Dtos.Customers;
 using AlliantProductManagementServer.Domain.Entities.Customers;
+using AlliantProductManagementServer.Domain.Exceptions;
 using AlliantProductManagementServer.Domain.Repositories.Customers;
 using AutoMapper;
 using MediatR;
@@ -28,6 +29,12 @@ namespace AlliantProductManagementServer.Application.Features.Clients.Handlers
         public async Task<CustomerDto> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = _mapper.Map<Customer>(request);
+
+            var clientWithSameIdentification = await _customerRepository.GetCustomerByIdentificationAsync(request.Identification);
+            if (clientWithSameIdentification != null)
+            {
+                throw new DomainException("The identification number is already registered", (int)HttpStatusCode.Conflict);
+            }
 
             await _customerRepository.AddAsync(customer);
 

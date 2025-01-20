@@ -10,5 +10,6 @@ namespace AlliantProductManagementServer.Domain.Repositories.Customers
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
+        Task<Customer?> GetCustomerByIdentificationAsync(string identification);
     }
 }
