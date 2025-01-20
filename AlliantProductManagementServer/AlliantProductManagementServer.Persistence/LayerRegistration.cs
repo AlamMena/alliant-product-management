@@ -26,6 +26,14 @@ namespace AlliantProductManagementServer.Persistence
                         m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)),
                 ServiceLifetime.Scoped);
 
+            // Automatically apply migrations
+            using (var serviceProvider = services.BuildServiceProvider())
+            {
+                using var scope = serviceProvider.CreateScope();
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+                context.Database.Migrate(); // Applies any pending migrations
+            }
+
             //Inyecciones de dependencias.
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
