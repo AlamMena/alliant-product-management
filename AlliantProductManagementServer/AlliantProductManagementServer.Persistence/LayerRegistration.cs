@@ -1,8 +1,11 @@
-﻿using AlliantProductManagementServer.Domain.Repositories.Core;
+﻿using AlliantProductManagementServer.Domain.Entities.Products;
+using AlliantProductManagementServer.Domain.Repositories.Core;
 using AlliantProductManagementServer.Domain.Repositories.Customers;
+using AlliantProductManagementServer.Domain.Repositories.Products;
 using AlliantProductManagementServer.Persistence.Contexts;
 using AlliantProductManagementServer.Persistence.Repositories.Core;
 using AlliantProductManagementServer.Persistence.Repositories.Customers;
+using AlliantProductManagementServer.Persistence.Repositories.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +29,8 @@ namespace AlliantProductManagementServer.Persistence
             //Inyecciones de dependencias.
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

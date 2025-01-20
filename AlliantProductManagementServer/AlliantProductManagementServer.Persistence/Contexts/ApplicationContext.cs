@@ -1,4 +1,5 @@
 ﻿using AlliantProductManagementServer.Domain.Entities.Customers;
+using AlliantProductManagementServer.Domain.Entities.Products;
 using AlliantProductManagementServer.Persistence.EntitiesConfig.Customers;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,5 +17,7 @@ namespace AlliantProductManagementServer.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new CustomersConfig());
         }
         public DbSet<Customer> Customers { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<CustomerProduct> CustomerProducts { get; set; } = null!;
     }
 }

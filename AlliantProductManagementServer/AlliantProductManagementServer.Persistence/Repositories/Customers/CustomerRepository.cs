@@ -30,5 +30,43 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Customers
                 throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
             }
         }
+        public async Task<Customer?> GetCustomerByIdWithProductsAsync(int id)
+        {
+            try
+            {
+                var customer = await _dbContext.Customers.Include(d => d.Products)
+                    .FirstOrDefaultAsync(d => d.Id == id);
+
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
+            }
+
+        }
+        public async Task<Customer?> UpdateCustomerWithProducts(Customer customer)
+        {
+            try
+            {
+                var entry = await _dbContext.Customers.Include(d => d.Products).FirstOrDefaultAsync(d => d.Id == customer.Id);
+
+                if (entry is not null)
+                {
+                    entry.Products = customer.Products;
+                    entry.UpdatedAt = DateTime.UtcNow;
+
+                    await _dbContext.SaveChangesAsync();
+                }
+
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
+            }
+
+        }
     }
+
 }

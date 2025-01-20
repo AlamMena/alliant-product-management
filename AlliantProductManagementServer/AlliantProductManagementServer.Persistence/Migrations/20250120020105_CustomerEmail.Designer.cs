@@ -3,6 +3,7 @@ using System;
 using AlliantProductManagementServer.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AlliantProductManagementServer.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250120020105_CustomerEmail")]
+    partial class CustomerEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,7 +120,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CustomerProducts");
+                    b.ToTable("CustomerProduct");
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Products.Product", b =>

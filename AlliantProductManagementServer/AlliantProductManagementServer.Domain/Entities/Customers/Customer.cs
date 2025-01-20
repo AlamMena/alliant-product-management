@@ -9,6 +9,7 @@ namespace AlliantProductManagementServer.Domain.Entities.Customers
         public string LastName { get; set; } = null!;
         public string Identification { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
-        public ICollection<Product> Products { get; set; } = [];
+        public string? Email { get; set; }
+        public ICollection<CustomerProduct> Products { get; set; } = [];
     }
 }

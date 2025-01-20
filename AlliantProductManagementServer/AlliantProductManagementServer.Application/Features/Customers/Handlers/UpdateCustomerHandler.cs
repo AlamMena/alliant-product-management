@@ -11,33 +11,34 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlliantProductManagementServer.Application.Features.Clients.Handlers
+namespace AlliantProductManagementServer.Application.Features.Customers.Handlers
 {
-    public class CreateCustomerCommand : IRequest<CustomerDto>
+    public class UpdateCustomerCommand : IRequest<CustomerDto>
     {
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public string Email { get; set; } = null!;
+        public string? Email { get; set; }
         public string Identification { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public IEnumerable<CustomerProductDto> Products { get; set; } = [];
     }
-    public class CreateCustomerHandler(ICustomerRepository customerRepository, IMapper mapper) : IRequestHandler<CreateCustomerCommand, CustomerDto>
+    public class UpdateCustomerHandler(ICustomerRepository customerRepository, IMapper mapper) : IRequestHandler<UpdateCustomerCommand, CustomerDto>
     {
         private readonly ICustomerRepository _customerRepository = customerRepository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<CustomerDto> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CustomerDto> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = _mapper.Map<Customer>(request);
 
             var customerWithSameIdentification = await _customerRepository.GetCustomerByIdentificationAsync(request.Identification);
-            if (customerWithSameIdentification != null)
+            if (customerWithSameIdentification != null && customerWithSameIdentification.Id != request.Id)
             {
                 throw new DomainException("The identification number is already registered", (int)HttpStatusCode.Conflict);
             }
 
-            await _customerRepository.AddAsync(customer);
+            await _customerRepository.UpdateCustomerWithProducts(customer);
 
             var response = _mapper.Map<Customer, CustomerDto>(customer);
 

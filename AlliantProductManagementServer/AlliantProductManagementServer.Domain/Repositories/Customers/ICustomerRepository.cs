@@ -11,5 +11,7 @@ namespace AlliantProductManagementServer.Domain.Repositories.Customers
     public interface ICustomerRepository : IRepository<Customer>
     {
         Task<Customer?> GetCustomerByIdentificationAsync(string identification);
+        Task<Customer?> GetCustomerByIdWithProductsAsync(int id);
+        Task<Customer?> UpdateCustomerWithProducts(Customer customer);
     }
 }

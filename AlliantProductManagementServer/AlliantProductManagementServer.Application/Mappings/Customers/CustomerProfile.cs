@@ -1,6 +1,9 @@
 ﻿using AlliantProductManagementServer.Application.Dtos.Customers;
+using AlliantProductManagementServer.Application.Dtos.Products;
 using AlliantProductManagementServer.Application.Features.Clients.Handlers;
+using AlliantProductManagementServer.Application.Features.Customers.Handlers;
 using AlliantProductManagementServer.Domain.Entities.Customers;
+using AlliantProductManagementServer.Domain.Entities.Products;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -15,7 +18,11 @@ namespace AlliantProductManagementServer.Application.Mappings.Customers
         public CustomerProfile()
         {
             CreateMap<CreateCustomerCommand, Customer>();
+            CreateMap<UpdateCustomerCommand, Customer>();
             CreateMap<Customer, CustomerDto>();
+            CreateMap<CustomerProductDto, CustomerProduct>().ReverseMap();
+            CreateMap<Customer, CustomerWithProductsDto>();
+
 
         }
     }
