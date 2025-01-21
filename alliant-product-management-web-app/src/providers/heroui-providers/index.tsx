@@ -16,14 +16,14 @@ export function HeroProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   return (
-    <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider
+    <HeroUIProvider>
+      {/* <NextThemesProvider
         attribute="class"
         enableSystem={false}
         defaultTheme="light"
-      >
-        {children}
-      </NextThemesProvider>
+      > */}
+      {children}
+      {/* </NextThemesProvider> */}
     </HeroUIProvider>
   );
 }

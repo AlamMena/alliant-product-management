@@ -1,6 +1,7 @@
 "use client";
-import { Avatar, Tooltip } from "@heroui/react";
+import { Avatar, Button, Tooltip } from "@heroui/react";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
+import { usePathname } from "next/navigation";
 
 const routes = [
   {
@@ -10,7 +11,7 @@ const routes = [
   },
   {
     title: "Customers",
-    href: "/",
+    href: "/customers",
     iconName: "solar:users-group-two-rounded-outline",
   },
   {
@@ -38,20 +39,32 @@ export const AcmeLogo = () => {
   );
 };
 export function SideBar() {
+  const pathname = usePathname();
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 h-screen border-r-2 w-fit p-8  bg-white ">
+    <div className="flex flex-col items-center justify-center space-y-4 h-screen border-r-2 w-fit p-8 border-2 rounded-xl">
       <AcmeLogo />
       {routes.map((route) => {
         return (
-          <div key={route.title}>
-            <Tooltip
-              className="capitalize"
-              content={route.title}
-              placement="right-end"
-            >
-              <Icon icon={route.iconName} width={24} height={24} />
-            </Tooltip>
-          </div>
+          <Tooltip
+            key={route.title}
+            className="capitalize cursor-pointer"
+            content={route.title}
+            placement="right-end"
+          >
+            <Button
+              isIconOnly
+              variant={"light"}
+              color={pathname === route.href ? "primary" : "default"}
+              startContent={
+                <Icon
+                  icon={route.iconName}
+                  className="cursor-pointer"
+                  width={24}
+                  height={24}
+                />
+              }
+            />
+          </Tooltip>
         );
       })}
 
