@@ -1,26 +1,15 @@
 "use client";
 import { ApexOptions } from "apexcharts";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ApexCharts from "@/lib/charts";
-const dataCharts = [
-  {
-    label: "Balance",
-    data: [
-      { date: "0001-01-01T00:00:00", value: 40 },
-      { date: "2023-02-19T17:09:45", value: 20 },
-      { date: "2023-02-20T12:00:50", value: 22 },
-      { date: "2023-02-21T01:03:07", value: 38 },
-      { date: "2023-02-22T14:27:08", value: 19 },
-    ],
-    total: 4234.34,
-    increasePercentage: 50,
-  },
-];
-export function ExpensesLineChart() {
+import { getCustomersCreatedByDate } from "@/lib/customers/actions";
+import { DateReport, DateReportData } from "@/lib/common/date-report";
+
+export function LineChart({ data }: { data?: DateReportData[] }) {
   const series = [
     {
-      name: "LineChart",
-      data: dataCharts[0].data.map((item) => item.value),
+      name: "Expenses",
+      data: data?.map((item) => item.value) ?? [],
     },
   ];
   const options: ApexOptions = {
@@ -38,8 +27,12 @@ export function ExpensesLineChart() {
     dataLabels: {
       enabled: false,
     },
+    // tooltip: {
+    //   enabled: 1,
+    // },
     xaxis: {
       //   : false,
+      categories: data?.map((d) => d.date) ?? [],
       labels: { show: false, style: { colors: "grey" } },
       axisTicks: { show: false },
     },
@@ -63,7 +56,7 @@ export function ExpensesLineChart() {
       options={options}
       series={series}
       type="area"
-      width={"95%"}
+      width={"100%"}
       height={"110"}
     />
   );

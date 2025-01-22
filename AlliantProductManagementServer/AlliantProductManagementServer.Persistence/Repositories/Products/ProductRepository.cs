@@ -25,7 +25,7 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Products
                     .Where(d => EF.Functions.ILike(d.Name, $"%{search}%"));
 
                 var products = await query
-                    .OrderBy(d => d.Id)
+                    .OrderByDescending(d => d.Id)
                     .Skip(limit * (page - 1))
                     .Take(limit)
                     .ToListAsync();

@@ -6,6 +6,7 @@ using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,10 +16,21 @@ namespace AlliantProductManagementServer.Application.Features.Clients.Handlers
 {
     public class CreateCustomerCommand : IRequest<CustomerDto>
     {
+        [Required]
         public string Name { get; set; } = null!;
+
+        [Required]
         public string LastName { get; set; } = null!;
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; } = null!;
+
+        [Required]
         public string Identification { get; set; } = null!;
+
+        [Required]
+        [Phone]
         public string PhoneNumber { get; set; } = null!;
         public IEnumerable<CustomerProductDto> Products { get; set; } = [];
     }

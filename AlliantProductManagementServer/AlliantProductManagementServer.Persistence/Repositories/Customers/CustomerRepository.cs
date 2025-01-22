@@ -56,7 +56,7 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Customers
                     .Where(d => EF.Functions.ILike(d.Name, $"%{name}%"));
 
                 var customers = await query
-                    .OrderBy(d => d.Id)
+                    .OrderByDescending(d => d.Id)
                     .Skip(limit * (page - 1))
                     .Take(limit)
                     .ToListAsync();
@@ -92,6 +92,87 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Customers
                 }
 
                 return customer;
+            }
+            catch (Exception ex)
+            {
+                throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
+            }
+
+        }
+
+        public async Task<DateReport> GetCustomersCreatedLastMonth()
+        {
+            try
+            {
+                var reports = await _dbContext.Products
+                    .GroupBy(d => new { d.CreatedAt })
+                    .Select(d => new DateReportData
+                    {
+                        Date = d.Key.CreatedAt,
+                        Value = d.Count(),
+                    })
+                    .ToListAsync();
+
+                return new DateReport
+                {
+                    Title = "Customers created this month",
+                    Total = reports.Sum(d => d.Value),
+                    Data = reports
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
+            }
+
+        }
+
+        public async Task<DateReport> GetCustomersAcquisitionsLastMonth()
+        {
+            try
+            {
+                var reports = await _dbContext.CustomerProducts
+                    .GroupBy(d => new { CreatedAt = d.CreatedAt.Date })
+                    .Select(d => new DateReportData
+                    {
+                        Date = d.Key.CreatedAt,
+                        Value = d.Count(),
+                    })
+                    .ToListAsync();
+
+                return new DateReport
+                {
+                    Title = "Acquisitions this month",
+                    Total = reports.Sum(d => d.Value),
+                    Data = reports
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
+            }
+
+        }
+
+        public async Task<DateReport> GetCustomersAcquisitionsBalanceLastMonth()
+        {
+            try
+            {
+                var reports = await _dbContext.CustomerProducts
+                    .GroupBy(d => new { d.CreatedAt })
+                    .Select(d => new DateReportData
+                    {
+                        Date = d.Key.CreatedAt,
+                        Value = d.Sum(d => d.Quantity * d.Price)
+                    })
+                    .ToListAsync();
+
+                return new DateReport
+                {
+                    Title = "Acquisitions balance this month",
+                    Total = reports.Sum(d => d.Value),
+                    Data = reports
+                };
             }
             catch (Exception ex)
             {

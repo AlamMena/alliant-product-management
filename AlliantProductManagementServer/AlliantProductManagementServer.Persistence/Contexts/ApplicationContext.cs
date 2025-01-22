@@ -3,6 +3,7 @@ using AlliantProductManagementServer.Domain.Entities.Products;
 using AlliantProductManagementServer.Persistence.EntitiesConfig.Customers;
 using AlliantProductManagementServer.Persistence.EntitiesConfig.Products;
 using AlliantProductManagementServer.Persistence.EntitiesConfig.ProductsCategories;
+using AlliantProductManagementServer.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace AlliantProductManagementServer.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new CustomersConfig());
             modelBuilder.ApplyConfiguration(new ProductsConfig());
             modelBuilder.ApplyConfiguration(new ProductsCategoriesConfig());
+            modelBuilder.SeedInitialData();
 
         }
         public DbSet<Customer> Customers { get; set; } = null!;

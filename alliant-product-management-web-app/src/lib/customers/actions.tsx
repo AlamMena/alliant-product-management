@@ -4,6 +4,7 @@ import { Customer } from "./types";
 import { AxiosError } from "axios";
 import { axiosInstance } from "../common/instance";
 import { ApiResponse } from "../common/api-response";
+import { DateReport } from "../common/date-report";
 
 export async function saveCustomer(
   customer: Customer
@@ -19,13 +20,11 @@ export async function saveCustomer(
       const res = await axiosInstance.put(`customer`, customer);
       console.log(customer, "res");
       response = res.data;
-      revalidatePath("/customers");
+      revalidatePath("/");
     }
     return response;
   } catch (error) {
     const parsedError = error as AxiosError;
-    console.log(parsedError.response?.data);
-
     let apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<Customer>;
 
@@ -63,7 +62,6 @@ export async function deleteCustomer(
     let response: ApiResponse<Customer>;
     const res = await axiosInstance.delete(`customer/` + customer.id);
     response = res.data;
-    console.log(response);
     return response;
   } catch (error) {
     const parsedError = error as AxiosError;
@@ -74,4 +72,20 @@ export async function deleteCustomer(
       status: parsedError.status,
     };
   }
+}
+export async function getCustomersCreatedByDate() {
+  const { data } = await axiosInstance.get(`customers/reports/createdByDate`);
+  return data as DateReport;
+}
+export async function getAcquisitionsByDate() {
+  const { data } = await axiosInstance.get(
+    `customers/reports/acquisitions/quantity`
+  );
+  return data as DateReport;
+}
+export async function getAcquisitionsBalanceByDate() {
+  const { data } = await axiosInstance.get(
+    `customers/reports/acquisitions/balance`
+  );
+  return data as DateReport;
 }

@@ -9,22 +9,22 @@ services:
       POSTGRES_DB: alliant-db
     ports:
       - "5436:5432" # Map the container's port 5432 to your host's port 5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data # Mount a named volume for persistent storage
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data # Mount a named volume for persistent storage
 
-  api:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: alliant-api
-    restart: always
-    # environment:
-    #   - ASPNETCORE_ENVIRONMENT=Development  # Set the environment (Development, Staging, Production)
-    #   - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=alliant_db;Username=admin;Password=password001
-    ports:
-      - "5000:8080" # Map the container's port 80 to your host's port 5000
-    depends_on:
-      - postgres # Ensure the PostgreSQL container starts before the API
+  # api:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #   container_name: alliant-api
+  #   restart: always
+  #   # environment:
+  #   #   - ASPNETCORE_ENVIRONMENT=Development  # Set the environment (Development, Staging, Production)
+  #   #   - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=alliant_db;Username=admin;Password=password001
+  #   ports:
+  #     - "5000:8080" # Map the container's port 80 to your host's port 5000
+  #   depends_on:
+  #     - postgres # Ensure the PostgreSQL container starts before the API
 
 volumes:
   pgdata:

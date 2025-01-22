@@ -14,6 +14,9 @@ namespace AlliantProductManagementServer.Domain.Repositories.Customers
         Task<Customer?> GetCustomerByIdentificationAsync(string identification);
         Task<Customer?> GetCustomerByIdWithProductsAsync(int id);
         Task<Customer?> UpdateCustomerWithProducts(Customer customer);
-        Task<PaginatedResponse<Customer>> GetCustomersByNameAsync(string name , int page, int limit);
+        Task<PaginatedResponse<Customer>> GetCustomersByNameAsync(string name, int page, int limit);
+        Task<DateReport> GetCustomersCreatedLastMonth();
+        Task<DateReport> GetCustomersAcquisitionsBalanceLastMonth();
+        Task<DateReport> GetCustomersAcquisitionsLastMonth();
     }
 }
