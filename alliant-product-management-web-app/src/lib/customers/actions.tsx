@@ -23,8 +23,9 @@ export async function saveCustomer(
     }
     return response;
   } catch (error) {
-    console.log(error);
     const parsedError = error as AxiosError;
+    console.log(parsedError.response?.data);
+
     let apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<Customer>;
 
@@ -43,7 +44,7 @@ export async function getCustomers({
   search?: string;
   limit: number;
 }) {
-  const searchParams = search ? `&name=${search}` : "";
+  const searchParams = search?.replace(/\s/g, "") ? `&name=${search}` : "";
   const { data } = await axiosInstance.get(
     `customers/filtered?page=${page ?? 1}&limit=${limit}` + searchParams
   );

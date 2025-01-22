@@ -23,6 +23,7 @@ import { Product } from "@/lib/products/types";
 import { useProductFormStore } from "@/stores/products/form";
 import { deleteProduct } from "@/lib/products/actions";
 import { ProductForm } from "../form";
+import { formatCurrency } from "@/lib/core";
 
 export const columns = [
   { name: "Id", uid: "id" },
@@ -69,8 +70,6 @@ export function ProductsDataTable() {
   };
 
   const renderCell = (product: Product, columnKey: React.Key) => {
-    const cellValue = product[columnKey as keyof Product];
-
     switch (columnKey) {
       case "id":
         return <span>{product.id}</span>;
@@ -79,13 +78,7 @@ export function ProductsDataTable() {
           <User avatarProps={{ radius: "sm", src: "" }} name={product.name} />
         );
       case "price":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize text-default-400">
-              {product.price}
-            </p>
-          </div>
-        );
+        return <span>{formatCurrency(product.price)}</span>;
       case "category":
         return (
           <Chip className="capitalize" size="sm" variant="flat">

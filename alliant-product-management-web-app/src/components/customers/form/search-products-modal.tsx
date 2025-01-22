@@ -1,5 +1,6 @@
 "use client";
 
+import { formatCurrency } from "@/lib/core";
 import { CustomerProduct } from "@/lib/customers/types";
 import { getProducts } from "@/lib/products/actions";
 import { Product } from "@/lib/products/types";
@@ -47,21 +48,17 @@ export function SearchProductsModal() {
 
   const renderCell = React.useCallback(
     (product: Product, columnKey: React.Key) => {
-      let input;
-      const cellValue = product[columnKey as keyof Product];
-
       switch (columnKey) {
         case "name":
-          return <span className="w-full">{cellValue}</span>;
+          return <span className="w-full">{product.name}</span>;
+        case "price":
+          return <span>{formatCurrency(product.price)}</span>;
         case "categoryId":
           return (
             <Chip className="capitalize" size="sm" variant="flat">
               Category name
             </Chip>
           );
-
-        default:
-          return cellValue;
       }
     },
     []
@@ -97,8 +94,9 @@ export function SearchProductsModal() {
         id: undefined,
         name: product.name,
         productId: product.id ?? 0,
-        price: 120,
-        quantity: 20,
+        price: product.price,
+        quantity: 1,
+        category: product.category,
       });
     });
 

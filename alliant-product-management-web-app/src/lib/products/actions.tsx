@@ -41,7 +41,8 @@ export async function getProducts({
   search?: string;
   limit: number;
 }) {
-  const searchParams = search ? `&filter=${search}` : "";
+  const searchParams = search?.replace(/\s/g, "") ? `&filter=${search}` : "";
+  console.log(searchParams);
   const { data } = await axiosInstance.get(
     `products/filtered?page=${page ?? 1}&limit=${limit}${searchParams}`
   );

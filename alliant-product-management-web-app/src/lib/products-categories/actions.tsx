@@ -14,7 +14,7 @@ export async function getCategories({
   search?: string;
   limit: number;
 }) {
-  const searchParams = search ? `&filter=${search}` : "";
+  const searchParams = search?.replace(/\s/g, "") ? `&filter=${search}` : "";
   const { data } = await axiosInstance.get(
     `product/categories?page=${page ?? 1}&limit=${limit}`
   );

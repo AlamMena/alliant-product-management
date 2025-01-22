@@ -22,7 +22,7 @@ namespace AlliantProductManagementServer.Application.Mappings.Customers
             CreateMap<Customer, CustomerDto>();
             CreateMap<CustomerProductDto, CustomerProduct>().ReverseMap()
                 .ForMember(d => d.Name, src => src.MapFrom(d => d.Product.Name))
-                .ForMember(d => d.Price, src => src.MapFrom(d => d.Product.Price));
+                .ForMember(d => d.Category, src => src.MapFrom(d => d.Product.Category));
             CreateMap<Customer, CustomerWithProductsDto>();
 
 

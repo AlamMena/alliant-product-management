@@ -70,8 +70,6 @@ export function CustomersDataTable() {
   };
 
   const renderCell = (customer: Customer, columnKey: React.Key) => {
-    const cellValue = customer[columnKey as keyof Customer];
-
     switch (columnKey) {
       case "id":
         return <span>{customer.id}</span>;
@@ -86,16 +84,7 @@ export function CustomersDataTable() {
           </User>
         );
       case "phoneNumber":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">
-              {customer.identification}
-            </p>
-            <p className="text-bold text-sm capitalize text-default-400">
-              {customer.phoneNumber}
-            </p>
-          </div>
-        );
+        return <p>{customer.phoneNumber}</p>;
       case "status":
         return (
           <Chip className="capitalize" size="sm" variant="flat">

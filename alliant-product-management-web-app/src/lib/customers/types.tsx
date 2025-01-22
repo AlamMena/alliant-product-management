@@ -1,4 +1,5 @@
 import z from "zod";
+import { ProductCategory } from "../products-categories/types";
 
 const CustomerProductSchema = z.object({
   id: z.number().optional(),
@@ -45,5 +46,6 @@ export interface CustomerProduct {
   name: string;
   price: number;
   quantity: number;
+  category: ProductCategory;
   productId: number;
 }

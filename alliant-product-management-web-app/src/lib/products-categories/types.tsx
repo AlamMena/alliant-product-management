@@ -3,7 +3,7 @@ import { z } from "zod";
 export interface ProductCategory {
   id: number;
   name: string;
-  description: string;
+  description?: string;
 }
 export const CategorySchema = z.object({
   id: z.number().optional(),

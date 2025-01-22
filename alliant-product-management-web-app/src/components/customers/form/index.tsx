@@ -89,7 +89,7 @@ export function CustomerForm() {
         form.reset(defaultValues);
       }}
     >
-      <DrawerContent className="p-8 max-w-xl w-full ">
+      <DrawerContent className="p-8 max-w-2xl w-full ">
         {isLoading ? (
           <Spinner className="absolute inset-0">Loading ...</Spinner>
         ) : (

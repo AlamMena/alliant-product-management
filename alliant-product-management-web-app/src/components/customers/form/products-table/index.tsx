@@ -22,7 +22,7 @@ import { CustomerProduct } from "@/lib/customers/types";
 export const columns = [
   { name: "Id", uid: "productId" },
   { name: "Name", uid: "name" },
-  { name: "Category", uid: "categoryId" },
+  { name: "Category", uid: "category" },
   { name: "Price", uid: "price" },
   { name: "Quantity", uid: "actions" },
 ];
@@ -57,12 +57,14 @@ export const CustomerProductsTable = () => {
         (d) => d.productId === customerProduct.productId
       );
       switch (columnKey) {
+        case "productId":
+          return <span className="w-full">{customerProduct.productId}</span>;
         case "name":
-          return <span className="w-full">{cellValue}</span>;
-        case "categoryId":
+          return <span className="w-full">{customerProduct.name}</span>;
+        case "category":
           return (
             <Chip className="capitalize" size="sm" variant="flat">
-              Category name
+              {customerProduct.category.name}
             </Chip>
           );
         case "price":
@@ -101,8 +103,6 @@ export const CustomerProductsTable = () => {
               />
             </div>
           );
-        default:
-          return cellValue;
       }
     },
     []
