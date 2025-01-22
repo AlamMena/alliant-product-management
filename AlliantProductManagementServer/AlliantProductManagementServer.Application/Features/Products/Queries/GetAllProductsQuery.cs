@@ -1,6 +1,6 @@
-﻿using AlliantProductManagementServer.Application.Dtos.Core;
-using AlliantProductManagementServer.Application.Dtos.Products;
+﻿using AlliantProductManagementServer.Application.Dtos.Products;
 using AlliantProductManagementServer.Application.Features.Core.Commands;
+using AlliantProductManagementServer.Domain.Core;
 using AlliantProductManagementServer.Domain.Repositories.Products;
 using AutoMapper;
 using MediatR;
@@ -14,16 +14,16 @@ namespace AlliantProductManagementServer.Application.Features.Products.Queries
 {
 
     public class GetAllProductsQuery(IProductRepository productRepository, IMapper mapper)
-        : IRequestHandler<GetAllPaginatedCommand<ProductDto>, PaginatedResponseDto<ProductDto>>
+        : IRequestHandler<GetPaginatedCommand<ProductDto>, PaginatedResponse<ProductDto>>
     {
         private readonly IProductRepository _productRepository = productRepository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<PaginatedResponseDto<ProductDto>> Handle(GetAllPaginatedCommand<ProductDto> request, CancellationToken cancellationToken)
+        public async Task<PaginatedResponse<ProductDto>> Handle(GetPaginatedCommand<ProductDto> request, CancellationToken cancellationToken)
         {
             var products = await _productRepository.GetAllPaginatedAsync(request.Page, request.Limit);
 
-            return new PaginatedResponseDto<ProductDto>
+            return new PaginatedResponse<ProductDto>
             {
                 Count = await _productRepository.CountAsync(),
                 Data = _mapper.Map<IEnumerable<ProductDto>>(products)

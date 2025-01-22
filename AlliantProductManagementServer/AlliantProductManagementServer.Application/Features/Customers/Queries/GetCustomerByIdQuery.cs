@@ -1,5 +1,4 @@
-﻿using AlliantProductManagementServer.Application.Dtos.Core;
-using AlliantProductManagementServer.Application.Dtos.Customers;
+﻿using AlliantProductManagementServer.Application.Dtos.Customers;
 using AlliantProductManagementServer.Application.Features.Core.Commands;
 using AlliantProductManagementServer.Domain.Entities.Customers;
 using AlliantProductManagementServer.Domain.Exceptions;

@@ -9,7 +9,7 @@ interface ConfirmationModalProps {
   description: string;
   triggerContent: ReactElement<any>;
   onConfirm: () => void | Promise<void>;
-  onCancel: () => void | Promise<void>;
+  onCancel?: () => void | Promise<void>;
 }
 export function ConfirmationModal({
   title,

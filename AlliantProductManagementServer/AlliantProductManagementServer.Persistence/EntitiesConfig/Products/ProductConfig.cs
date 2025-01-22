@@ -10,7 +10,7 @@ using AlliantProductManagementServer.Domain.Entities.Products;
 
 namespace AlliantProductManagementServer.Persistence.EntitiesConfig.Products
 {
-    internal class ProductConfig : IEntityTypeConfiguration<Product>
+    public class ProductsConfig : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
@@ -18,6 +18,7 @@ namespace AlliantProductManagementServer.Persistence.EntitiesConfig.Products
             builder.Property(x => x.Name).HasMaxLength(60);
             builder.Property(x => x.Price);
             builder.HasOne(x => x.Category).WithMany(x => x.Products);
+            builder.Navigation(d => d.Category).AutoInclude();
             builder.HasQueryFilter(d => !d.IsDeleted);
         }
     }

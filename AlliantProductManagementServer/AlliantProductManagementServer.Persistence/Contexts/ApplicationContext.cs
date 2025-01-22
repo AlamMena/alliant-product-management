@@ -1,6 +1,8 @@
 ﻿using AlliantProductManagementServer.Domain.Entities.Customers;
 using AlliantProductManagementServer.Domain.Entities.Products;
 using AlliantProductManagementServer.Persistence.EntitiesConfig.Customers;
+using AlliantProductManagementServer.Persistence.EntitiesConfig.Products;
+using AlliantProductManagementServer.Persistence.EntitiesConfig.ProductsCategories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,9 @@ namespace AlliantProductManagementServer.Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CustomersConfig());
+            modelBuilder.ApplyConfiguration(new ProductsConfig());
+            modelBuilder.ApplyConfiguration(new ProductsCategoriesConfig());
+
         }
         public DbSet<Customer> Customers { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;

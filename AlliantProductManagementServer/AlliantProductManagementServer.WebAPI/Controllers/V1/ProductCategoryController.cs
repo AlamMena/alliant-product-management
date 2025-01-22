@@ -18,21 +18,21 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
     [Route("api")]
     public class ProductCategoryController(IMediator mediator) : CoreController(mediator)
     {
-        [HttpPost("/product/category")]
+        [HttpPost("product/category")]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProductCategoryCommand command)
         {
             var category = await Mediator.Send(command);
             return Created($"/category/{category.Id}", category);
         }
 
-        [HttpGet("/product/categories")]
-        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllPaginatedCommand<ProductCategoryDto> command)
+        [HttpGet("product/categories")]
+        public async Task<IActionResult> GetAllAsync([FromQuery] GetPaginatedCommand<ProductCategoryDto> command)
         {
             var categories = await Mediator.Send(command);
             return Ok(categories);
         }
 
-        [HttpPut("/product/category")]
+        [HttpPut("product/category")]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductCategoryCommand command)
         {
             var customer = await Mediator.Send(command);
@@ -47,7 +47,7 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
         }
 
         [HttpGet("product/category/{Id}")]
-        public async Task<IActionResult> GetCustomerByIdAsync(GetProductCategoryByIdQuery command)
+        public async Task<IActionResult> GetByIdAsync(GetProductCategoryByIdCommand command)
         {
             var customer = await Mediator.Send(command);
             return Ok(customer);

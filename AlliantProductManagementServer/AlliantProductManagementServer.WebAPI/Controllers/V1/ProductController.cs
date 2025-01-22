@@ -18,15 +18,15 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
     [Route("api")]
     public class ProductController(IMediator mediator) : CoreController(mediator)
     {
-        [HttpPost("/product")]
+        [HttpPost("product")]
         public async Task<IActionResult> CreateAsync([FromBody] CreateProductCommand command)
         {
             var product = await Mediator.Send(command);
             return Created($"/product/{product.Id}", product);
         }
 
-        [HttpGet("/products")]
-        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllPaginatedCommand<ProductDto> command)
+        [HttpGet("products")]
+        public async Task<IActionResult> GetAllAsync([FromQuery] GetPaginatedCommand<ProductDto> command)
         {
             var products = await Mediator.Send(command);
             return Ok(products);
@@ -47,10 +47,18 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
         }
 
         [HttpGet("product/{Id}")]
-        public async Task<IActionResult> GetProductByIdAsync(GetAllProductsQuery command)
+        public async Task<IActionResult> GetProductByIdAsync(GetProductByIdCommand command)
         {
             var product = await Mediator.Send(command);
             return Ok(product);
+        }
+
+
+        [HttpGet("products/filtered")]
+        public async Task<IActionResult> GetProductByIdAsync([FromQuery]GetProductsFilteredCommand command)
+        {
+            var products = await Mediator.Send(command);
+            return Ok(products);
         }
     }
 }

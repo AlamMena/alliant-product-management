@@ -145,7 +145,8 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<string>("Note")
                         .HasColumnType("text");
@@ -189,7 +190,8 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
 
                     b.Property<string>("Note")
                         .HasColumnType("text");
@@ -213,11 +215,13 @@ namespace AlliantProductManagementServer.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AlliantProductManagementServer.Domain.Entities.Products.Product", null)
+                    b.HasOne("AlliantProductManagementServer.Domain.Entities.Products.Product", "Product")
                         .WithMany("Customers")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Products.Product", b =>

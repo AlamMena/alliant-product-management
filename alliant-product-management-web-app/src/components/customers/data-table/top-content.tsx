@@ -1,61 +1,44 @@
-import {
-  Button,
-  Dropdown,
-  DropdownMenu,
-  DropdownTrigger,
-  Input,
-} from "@heroui/react";
+import { Button, Input } from "@heroui/react";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
-import CustomersToolBar from "../toolbar";
 import { CustomerForm } from "../form";
+import { useCustomersStore } from "@/stores/customers";
+import { debounce } from "lodash";
+import { useCustomerFormStore } from "@/stores/customers/form";
 
 export const TopContent = () => {
-  const router = useRouter();
-
   const [filterValue, setFilterValue] = React.useState("");
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const { getCustomers } = useCustomersStore();
+  const { setOpen } = useCustomerFormStore();
 
-  const onSearchChange = React.useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-    } else {
-      setFilterValue("");
-    }
-    router.push(`/clients?page=1&search=${value}`);
-  }, []);
-
-  const onClear = React.useCallback(() => {
-    setFilterValue("");
-    router.push(`/clients?page=1&search=${""}`);
-  }, []);
-
-  const onRowsPerPageChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRowsPerPage(Number(e.target.value));
-    },
+  // Debounce the API call
+  const debouncedSearch = React.useMemo(
+    () =>
+      debounce(async (value: string) => {
+        await getCustomers({ page: 1, limit: 5, search: value });
+      }, 300), // 300ms debounce delay
     []
   );
 
-  function debounce(func: (...args: any[]) => void, delay: number) {
-    let timer: NodeJS.Timeout;
-    return (...args: any[]) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  }
-
-  const debouncedNavigate = React.useCallback(
-    debounce((value: string) => {
-      if (value.trim() !== "") {
-        router.push("/sim");
+  const onSearchChange = React.useCallback(
+    (value?: string) => {
+      if (value) {
+        setFilterValue(value);
+      } else {
+        setFilterValue("");
       }
-    }, 300),
-    []
+      // Call the debounced function
+      debouncedSearch(value || "");
+    },
+    [debouncedSearch]
   );
+
+  // Cleanup the debounce function on component unmount
+  React.useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
 
   return React.useMemo(() => {
     return (
@@ -71,10 +54,9 @@ export const TopContent = () => {
             isClearable
             className="w-full sm:max-w-[44%]"
             placeholder="Search by name..."
-            // startContent={<SearchIcon />}
             value={filterValue}
-            onClear={() => onClear()}
-            onValueChange={onSearchChange}
+            // onClear={() => onClear()}
+            onValueChange={(e) => onSearchChange(e)}
           />
           <Button
             size="sm"
@@ -93,21 +75,14 @@ export const TopContent = () => {
             }
           />
 
-          <CustomerForm
-            triggerContent={
-              <Button
-                size="sm"
-                isIconOnly
-                variant="shadow"
-                color="primary"
-                startContent={
-                  <Icon
-                    icon="solar:add-circle-outline"
-                    width={16}
-                    height={16}
-                  />
-                }
-              />
+          <Button
+            size="sm"
+            isIconOnly
+            onPress={() => setOpen(true, undefined)}
+            variant="shadow"
+            color="primary"
+            startContent={
+              <Icon icon="solar:add-circle-outline" width={16} height={16} />
             }
           />
         </div>
@@ -118,5 +93,5 @@ export const TopContent = () => {
         </div>
       </div>
     );
-  }, [filterValue, onSearchChange, onRowsPerPageChange]);
+  }, [filterValue, onSearchChange]);
 };

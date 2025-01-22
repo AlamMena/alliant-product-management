@@ -1,4 +1,5 @@
-﻿using AlliantProductManagementServer.Domain.Entities.Customers;
+﻿using AlliantProductManagementServer.Domain.Core;
+using AlliantProductManagementServer.Domain.Entities.Customers;
 using AlliantProductManagementServer.Domain.Repositories.Core;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace AlliantProductManagementServer.Domain.Repositories.Customers
         Task<Customer?> GetCustomerByIdentificationAsync(string identification);
         Task<Customer?> GetCustomerByIdWithProductsAsync(int id);
         Task<Customer?> UpdateCustomerWithProducts(Customer customer);
+        Task<PaginatedResponse<Customer>> GetCustomersByNameAsync(string name , int page, int limit);
     }
 }

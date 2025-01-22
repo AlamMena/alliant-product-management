@@ -1,4 +1,12 @@
 import z from "zod";
+
+const CustomerProductSchema = z.object({
+  id: z.number().optional(),
+  name: z.string().optional(),
+  productId: z.number().optional(),
+  price: z.coerce.number().optional(),
+  quantity: z.coerce.number().optional(),
+});
 export const CustomerSchema = z.object({
   id: z.number().optional(),
   name: z
@@ -19,6 +27,7 @@ export const CustomerSchema = z.object({
     .nullable()
     .optional(),
   phoneNumber: z.string().min(2),
+  products: CustomerProductSchema.array().optional(),
 });
 
 export interface Customer {
@@ -28,4 +37,13 @@ export interface Customer {
   email: string;
   phoneNumber: string;
   identification: string;
+  products?: CustomerProduct[];
+}
+
+export interface CustomerProduct {
+  id?: number;
+  name: string;
+  price: number;
+  quantity: number;
+  productId: number;
 }

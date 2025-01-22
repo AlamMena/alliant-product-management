@@ -1,15 +1,7 @@
-﻿using AlliantProductManagementServer.Application.Dtos.Customers;
-using AlliantProductManagementServer.Domain.Entities.Customers;
-using AlliantProductManagementServer.Domain.Exceptions;
+﻿using AlliantProductManagementServer.Domain.Exceptions;
 using AlliantProductManagementServer.Domain.Repositories.Customers;
-using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AlliantProductManagementServer.Application.Features.Customers.Handlers
 {

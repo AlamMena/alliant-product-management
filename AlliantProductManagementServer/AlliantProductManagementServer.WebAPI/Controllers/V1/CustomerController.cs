@@ -36,7 +36,7 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
         }
 
         [HttpGet("customers")]
-        public async Task<IActionResult> GetAllAsync([FromQuery] GetAllPaginatedCommand<CustomerDto> command)
+        public async Task<IActionResult> GetAllAsync([FromQuery] GetPaginatedCommand<CustomerDto> command)
         {
             var customers = await Mediator.Send(command);
             return Ok(customers);
@@ -47,6 +47,12 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
         {
             var customer = await Mediator.Send(command);
             return Ok(customer);
+        }
+        [HttpGet("customers/filtered")]
+        public async Task<IActionResult> GetCustomersFiltered(GetCustomersByNameCommand command)
+        {
+            var customers = await Mediator.Send(command);
+            return Ok(customers);
         }
     }
 }

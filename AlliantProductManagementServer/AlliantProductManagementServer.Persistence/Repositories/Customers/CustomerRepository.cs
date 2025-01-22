@@ -1,4 +1,5 @@
-﻿using AlliantProductManagementServer.Domain.Entities.Customers;
+﻿using AlliantProductManagementServer.Domain.Core;
+using AlliantProductManagementServer.Domain.Entities.Customers;
 using AlliantProductManagementServer.Domain.Exceptions;
 using AlliantProductManagementServer.Domain.Repositories.Core;
 using AlliantProductManagementServer.Domain.Repositories.Customers;
@@ -34,10 +35,39 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Customers
         {
             try
             {
-                var customer = await _dbContext.Customers.Include(d => d.Products)
+                var customer = await _dbContext.Customers
+                    .Include(d => d.Products)
+                    .ThenInclude(d => d.Product)
                     .FirstOrDefaultAsync(d => d.Id == id);
 
                 return customer;
+            }
+            catch (Exception ex)
+            {
+                throw new DomainException(ex.Message, (int)HttpStatusCode.InternalServerError);
+            }
+
+        }
+        public async Task<PaginatedResponse<Customer>> GetCustomersByNameAsync(string name, int page, int limit)
+        {
+            try
+            {
+                var query = _dbContext.Customers
+                    .Where(d => EF.Functions.ILike(d.Name, $"%{name}%"));
+
+                var customers = await query
+                    .OrderBy(d => d.Id)
+                    .Skip(limit * (page - 1))
+                    .Take(limit)
+                    .ToListAsync();
+
+                var customersCount = await query.CountAsync();
+
+                return new PaginatedResponse<Customer>
+                {
+                    Count = customersCount,
+                    Data = customers
+                };
             }
             catch (Exception ex)
             {
@@ -53,6 +83,8 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Customers
 
                 if (entry is not null)
                 {
+                    _dbContext.Entry(entry).CurrentValues.SetValues(customer);
+
                     entry.Products = customer.Products;
                     entry.UpdatedAt = DateTime.UtcNow;
 

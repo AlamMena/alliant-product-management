@@ -18,7 +18,8 @@ namespace AlliantProductManagementServer.Application.Mappings.Products
         public ProductCategoryProfile()
         {
             CreateMap<CreateProductCategoryCommand, ProductCategory>();
-            CreateMap<ProductCategory, ProductCategoryDto>();
+            CreateMap<UpdateProductCategoryCommand, ProductCategory>();
+            CreateMap<ProductCategory, ProductCategoryDto>().ReverseMap();
 
         }
     }

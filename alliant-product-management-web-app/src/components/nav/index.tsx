@@ -12,6 +12,7 @@ import {
   Avatar,
   User as UserComponent,
 } from "@heroui/react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const AcmeLogo = () => {
@@ -32,7 +33,22 @@ export const AcmeLogo = () => {
     </svg>
   );
 };
+const routes = [
+  {
+    title: "Customers",
+    href: "/customers",
+  },
+  {
+    title: "Products",
+    href: "/products",
+  },
+  {
+    title: "Categories",
+    href: "/categories",
+  },
+];
 export function AppNavbar() {
+  const pathname = usePathname();
   return (
     <Navbar
       isBordered
@@ -43,31 +59,21 @@ export function AppNavbar() {
       </NavbarBrand>
 
       <NavbarContent justify="start">
-        <NavbarItem isActive>
-          <Link color="primary" href="#" className="text-white text-sm">
-            Inicio
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            aria-current="page"
-            color="foreground"
-            href="#"
-            className="text-foreground-300 text-sm"
-          >
-            Configuracion
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            aria-current="page"
-            color="foreground"
-            href="#"
-            className="text-foreground-300 text-sm"
-          >
-            Cerrar sesion
-          </Link>
-        </NavbarItem>
+        {routes.map((route) => (
+          <NavbarItem isActive={pathname === route.href} key={route.title}>
+            <Link
+              color="primary"
+              href={route.href}
+              className={
+                pathname === route.href
+                  ? "text-white text-sm"
+                  : "text-foreground-300 text-sm"
+              }
+            >
+              {route.title}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">

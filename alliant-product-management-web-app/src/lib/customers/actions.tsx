@@ -9,13 +9,15 @@ export async function saveCustomer(
   customer: Customer
 ): Promise<ApiResponse<Customer>> {
   try {
+    console.log(customer, "res");
+
     let response: ApiResponse<Customer>;
     if (!customer.id) {
       const res = await axiosInstance.post(`customer`, customer);
       response = res.data;
     } else {
       const res = await axiosInstance.put(`customer`, customer);
-      console.log(res.data, "res");
+      console.log(customer, "res");
       response = res.data;
       revalidatePath("/customers");
     }
@@ -41,11 +43,16 @@ export async function getCustomers({
   search?: string;
   limit: number;
 }) {
+  const searchParams = search ? `&name=${search}` : "";
   const { data } = await axiosInstance.get(
-    `customers?page=${page ?? 1}&limit=${limit}`
+    `customers/filtered?page=${page ?? 1}&limit=${limit}` + searchParams
   );
-
   return data as { count: number; data: Customer[] };
+}
+
+export async function getCustomerById({ id }: { id: number }) {
+  const { data } = await axiosInstance.get(`customer/${id}`);
+  return data as Customer;
 }
 
 export async function deleteCustomer(

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlliantProductManagementServer.Application.Dtos.Core
+namespace AlliantProductManagementServer.Domain.Core
 {
-    public class PaginatedResponseDto<T>
+    public class PaginatedResponse<T>
     {
         public int Count { get; set; }
         public IEnumerable<T> Data { get; set; } = [];
