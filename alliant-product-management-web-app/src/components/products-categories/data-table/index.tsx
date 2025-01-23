@@ -57,6 +57,7 @@ export function CategoriesDataTable() {
         description: response.message,
         type: "error",
       });
+      return;
     }
     await getCategories({ page: 1, limit: 5 });
     displayToast({

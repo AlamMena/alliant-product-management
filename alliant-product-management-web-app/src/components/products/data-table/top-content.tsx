@@ -4,10 +4,12 @@ import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { debounce } from "lodash";
 import { useProductsStore } from "@/stores/products";
 import { useProductFormStore } from "@/stores/products/form";
+import { HandleDownloadTxt } from "@/lib/core";
+import { Product } from "@/lib/products/types";
 
 export const TopContent = () => {
   const [filterValue, setFilterValue] = React.useState("");
-  const { getProducts } = useProductsStore();
+  const { getProducts, products } = useProductsStore();
   const { setOpen } = useProductFormStore();
 
   // Debounce the API call
@@ -61,6 +63,7 @@ export const TopContent = () => {
             size="sm"
             isIconOnly
             variant="shadow"
+            onPress={() => onSearchChange(filterValue)}
             startContent={
               <Icon icon="solar:magnifer-outline" width={16} height={16} />
             }
@@ -68,6 +71,9 @@ export const TopContent = () => {
           <Button
             size="sm"
             isIconOnly
+            onPress={() =>
+              HandleDownloadTxt<Product>("prodcuts", products.data)
+            }
             variant="shadow"
             startContent={
               <Icon icon="solar:file-download-outline" width={16} height={16} />

@@ -7,15 +7,19 @@ import { revalidatePath } from "next/cache";
 
 export async function getCategories({
   page,
+  search,
   limit,
 }: {
   page: number;
   search?: string;
   limit: number;
 }) {
+  const searchParams = search?.replace(/\s/g, "") ? `&filter=${search}` : "";
   const { data } = await axiosInstance.get(
-    `product/categories?page=${page ?? 1}&limit=${limit}`
+    `product/categories/filtered?page=${page ?? 1}&limit=${limit}` +
+      searchParams
   );
+
   return data as { count: number; data: ProductCategory[] };
 }
 export async function deleteCategory(
@@ -58,7 +62,6 @@ export async function saveCategory(
     }
     return response;
   } catch (error) {
-    console.log(error);
     const parsedError = error as AxiosError;
     const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<ProductCategory>;

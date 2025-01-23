@@ -207,7 +207,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategory");
+                    b.ToTable("ProductsCategories");
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Users.User", b =>

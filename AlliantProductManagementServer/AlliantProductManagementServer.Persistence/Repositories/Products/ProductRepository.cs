@@ -44,5 +44,10 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Products
             }
 
         }
+        public async Task<bool> ProductHasCustomers(int productId)
+        {
+            return await _dbContext.Products.Include(d => d.Customers)
+                .AnyAsync(d => d.Id == productId && d.Customers.Any());
+        }
     }
 }

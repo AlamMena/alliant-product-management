@@ -28,9 +28,13 @@ namespace AlliantProductManagementServer.Application.Features.Products.Handlers
             var product = await _productRepository.GetByIdAsync(request.Id);
             if (product is null)
             {
-                throw new DomainException("Product not found", (int)HttpStatusCode.NotFound);
+                throw new DomainException("Product not found.", (int)HttpStatusCode.NotFound);
             }
-
+            var productHasCustomers = await _productRepository.ProductHasCustomers(request.Id);
+            if (productHasCustomers)
+            {
+                throw new DomainException("Product has active customers and can't be removed.", (int)HttpStatusCode.Conflict);
+            }
             var response = await _productRepository.DeleteAsync(request.Id);
 
             return response;

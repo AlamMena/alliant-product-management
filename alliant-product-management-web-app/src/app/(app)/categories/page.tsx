@@ -1,5 +1,4 @@
 import { Bredacrumb } from "@/components/breadcrumbs";
-import { BalanceCard } from "@/components/customers/stats/balance-card";
 import { CategoriesDataTable } from "@/components/products-categories/data-table";
 
 export default async function CategoriesPage() {
@@ -17,11 +16,11 @@ export default async function CategoriesPage() {
         <div className="flex w-full justify-between">
           <h1 className="text-2xl w-full text-white">Categories Management</h1>
         </div>
-        <div className="flex space-x-4 w-full py-4 h-full">
+        {/* <div className="flex space-x-4 w-full py-4 h-full">
           {[1, 2, 3].map((item) => (
             <BalanceCard key={item} />
           ))}
-        </div>
+        </div> */}
         <CategoriesDataTable />
       </div>
     </div>

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AlliantProductManagementServer.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250123045844_Initial")]
+    [Migration("20250123081223_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -210,7 +210,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductCategory");
+                    b.ToTable("ProductsCategories");
                 });
 
             modelBuilder.Entity("AlliantProductManagementServer.Domain.Entities.Users.User", b =>

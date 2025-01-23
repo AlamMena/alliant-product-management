@@ -1,5 +1,4 @@
 import { Bredacrumb } from "@/components/breadcrumbs";
-import { BalanceCard } from "@/components/customers/stats/balance-card";
 import { ProductsDataTable } from "@/components/products/data-table";
 
 export default async function ProductsPage() {
@@ -17,11 +16,11 @@ export default async function ProductsPage() {
         <div className="flex w-full justify-between">
           <h1 className="text-2xl w-full text-white">Products Management</h1>
         </div>
-        <div className="flex space-x-4 w-full py-4">
+        {/* <div className="flex space-x-4 w-full py-4">
           {[1, 2, 3].map((item) => (
             <BalanceCard key={item} />
           ))}
-        </div>
+        </div> */}
         <ProductsDataTable />
       </div>
     </div>

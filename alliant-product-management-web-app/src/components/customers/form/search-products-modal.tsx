@@ -125,6 +125,7 @@ export function SearchProductsModal() {
   const debouncedSearch = React.useMemo(
     () =>
       debounce(async (value: string) => {
+        console.log("callback");
         await handleGetProducts(value);
       }, 300),
     [handleGetProducts]
@@ -137,6 +138,7 @@ export function SearchProductsModal() {
       } else {
         setFilterValue("");
       }
+
       // Call the debounced function
       debouncedSearch(value || "");
     },
@@ -149,11 +151,11 @@ export function SearchProductsModal() {
   };
 
   // Cleanup the debounce function on component unmount
-  React.useEffect(() => {
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [debouncedSearch]);
+  // React.useEffect(() => {
+  //   return () => {
+  //     debouncedSearch.cancel();
+  //   };
+  // }, [debouncedSearch]);
 
   const loadingState = isLoading ? "loading" : "idle";
   return (

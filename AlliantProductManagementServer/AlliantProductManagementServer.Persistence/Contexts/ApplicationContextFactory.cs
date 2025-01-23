@@ -14,7 +14,7 @@ namespace AlliantProductManagementServer.Persistence.Contexts
         public ApplicationContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            optionsBuilder.UseNpgsql("Host=alliant-manager-database;Port=5436;Database=alliant-db;Username=admin;Password=password001");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5436;Database=alliant-db;Username=admin;Password=password001");
 
             return new ApplicationContext(optionsBuilder.Options);
         }

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { redirect } from "next/navigation";
 import { RegisterSchema } from "@/lib/users/types";
-import { logIn, register } from "@/lib/users/actions";
+import { register } from "@/lib/users/actions";
 
 export function RegisterForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

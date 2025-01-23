@@ -1,4 +1,4 @@
-# ALLIANT PRODUCTS MANAGEMENT
+# Alliant Products Management
 
 ## Overview
 
@@ -20,7 +20,7 @@ This project is a full-stack web application that consists of a **Frontend** bui
 - **User Authentication**: Secure login and registration.
 - **CRUD Operations** for managing **customers**, **products**, and **categories**.
 - **Dynamic Reporting** and interactive **charts** using **ApexCharts**.
-- **Fully Responsive UI** with **Bootstrap** for a seamless user experience.
+- **Fully Responsive UI** with **HeorUI** for a seamless user experience.
 
 ### Docker Compose
 

@@ -4,10 +4,12 @@ import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { useCustomersStore } from "@/stores/customers";
 import { debounce } from "lodash";
 import { useCustomerFormStore } from "@/stores/customers/form";
+import { HandleDownloadTxt } from "@/lib/core";
+import { Customer } from "@/lib/customers/types";
 
 export const TopContent = () => {
   const [filterValue, setFilterValue] = React.useState("");
-  const { getCustomers } = useCustomersStore();
+  const { getCustomers, customers } = useCustomersStore();
   const { setOpen } = useCustomerFormStore();
 
   // Debounce the API call
@@ -61,6 +63,7 @@ export const TopContent = () => {
             size="sm"
             isIconOnly
             variant="shadow"
+            onPress={() => onSearchChange(filterValue)}
             startContent={
               <Icon icon="solar:magnifer-outline" width={16} height={16} />
             }
@@ -68,6 +71,9 @@ export const TopContent = () => {
           <Button
             size="sm"
             isIconOnly
+            onPress={() =>
+              HandleDownloadTxt<Customer>("customers", customers.data)
+            }
             variant="shadow"
             startContent={
               <Icon icon="solar:file-download-outline" width={16} height={16} />

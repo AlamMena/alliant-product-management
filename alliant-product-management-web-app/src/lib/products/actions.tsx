@@ -15,7 +15,6 @@ export async function saveProduct(
       response = res.data;
     } else {
       const res = await axiosInstance.put(`product`, product);
-      console.log(res.data, "res");
       response = res.data;
       revalidatePath("/products");
     }
@@ -42,7 +41,6 @@ export async function getProducts({
   limit: number;
 }) {
   const searchParams = search?.replace(/\s/g, "") ? `&filter=${search}` : "";
-  console.log(searchParams);
   const { data } = await axiosInstance.get(
     `products/filtered?page=${page ?? 1}&limit=${limit}${searchParams}`
   );

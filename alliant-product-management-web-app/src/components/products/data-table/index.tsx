@@ -60,6 +60,7 @@ export function ProductsDataTable() {
         description: response.message,
         type: "error",
       });
+      return;
     }
     await getProducts({ page: 1, limit: 5 });
     displayToast({

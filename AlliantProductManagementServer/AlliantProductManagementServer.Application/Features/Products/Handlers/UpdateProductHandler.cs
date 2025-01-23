@@ -1,13 +1,10 @@
 ﻿using AlliantProductManagementServer.Application.Dtos.Products;
 using AlliantProductManagementServer.Domain.Entities.Products;
+using AlliantProductManagementServer.Domain.Exceptions;
 using AlliantProductManagementServer.Domain.Repositories.Products;
 using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace AlliantProductManagementServer.Application.Features.Products.Handlers
 {
@@ -20,15 +17,22 @@ namespace AlliantProductManagementServer.Application.Features.Products.Handlers
         public ProductCategoryDto Category { get; set; } = null!;
     }
 
-    public class UpdateProductHandler(IProductRepository productRepository, IMapper mapper)
+    public class UpdateProductHandler(IProductRepository productRepository, IMapper mapper, IProductCategoryRepository productCategoryRepository)
         : IRequestHandler<UpdateProductCommand, ProductDto>
     {
         private readonly IProductRepository _productRepository = productRepository;
+        private readonly IProductCategoryRepository _productCategoryRepository = productCategoryRepository;
         private readonly IMapper _mapper = mapper;
 
         public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var product = _mapper.Map<Product>(request);
+
+            var category = await _productCategoryRepository.GetByIdAsync(product.CategoryId);
+            if (category is null)
+            {
+                throw new DomainException("Category not found", (int)HttpStatusCode.BadRequest);
+            }
 
             await _productRepository.UpdateAsync(product);
 

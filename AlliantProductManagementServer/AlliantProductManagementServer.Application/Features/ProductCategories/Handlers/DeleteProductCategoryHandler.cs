@@ -22,7 +22,12 @@ namespace AlliantProductManagementServer.Application.Features.ProductCategories.
             var category = await _productCategoryRepository.GetByIdAsync(request.Id);
             if (category is null)
             {
-                throw new DomainException("Category not found", (int)HttpStatusCode.NotFound);
+                throw new DomainException("Category not found.", (int)HttpStatusCode.NotFound);
+            }
+            var categoryHasProducts = await _productCategoryRepository.CategoryHasProducts(request.Id);
+            if (categoryHasProducts)
+            {
+                throw new DomainException("Category has products and can't be removed.", (int)HttpStatusCode.Conflict);
             }
 
             var response = await _productCategoryRepository.DeleteAsync(request.Id);

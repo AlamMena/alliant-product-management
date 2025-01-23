@@ -29,6 +29,7 @@ namespace AlliantProductManagementServer.Persistence.Contexts
         }
         public DbSet<Customer> Customers { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<ProductCategory> ProductsCategories { get; set; } = null!;
         public DbSet<CustomerProduct> CustomerProducts { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
     }

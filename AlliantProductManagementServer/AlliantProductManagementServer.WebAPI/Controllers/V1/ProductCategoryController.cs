@@ -35,8 +35,8 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
         [HttpPut("product/category")]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateProductCategoryCommand command)
         {
-            var customer = await Mediator.Send(command);
-            return Ok(customer);
+            var category = await Mediator.Send(command);
+            return Ok(category);
         }
 
         [HttpDelete("product/category/{Id}")]
@@ -49,8 +49,14 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
         [HttpGet("product/category/{Id}")]
         public async Task<IActionResult> GetByIdAsync(GetProductCategoryByIdCommand command)
         {
-            var customer = await Mediator.Send(command);
-            return Ok(customer);
+            var category = await Mediator.Send(command);
+            return Ok(category);
+        }
+        [HttpGet("product/categories/filtered")]
+        public async Task<IActionResult> GetCategoriesFiltered(GetProductCategoriesByNameCommand command)
+        {
+            var categories = await Mediator.Send(command);
+            return Ok(categories);
         }
     }
 }

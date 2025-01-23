@@ -59,6 +59,7 @@ export function CustomersDataTable() {
         description: response.message,
         type: "error",
       });
+      return;
     }
     await getCustomers({ page: 1, limit: 5 });
 

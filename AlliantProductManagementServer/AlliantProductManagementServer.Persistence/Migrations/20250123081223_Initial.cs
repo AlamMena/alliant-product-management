@@ -36,7 +36,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductCategory",
+                name: "ProductsCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -52,7 +52,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductCategory", x => x.Id);
+                    table.PrimaryKey("PK_ProductsCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,9 +98,9 @@ namespace AlliantProductManagementServer.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_ProductCategory_CategoryId",
+                        name: "FK_Products_ProductsCategories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "ProductCategory",
+                        principalTable: "ProductsCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -171,7 +171,7 @@ namespace AlliantProductManagementServer.Persistence.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "ProductCategory");
+                name: "ProductsCategories");
         }
     }
 }
