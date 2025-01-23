@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace AlliantProductManagementServer.Application.Security
 {
-    public interface IJwtHandler
+    public interface IAuthHandler
     {
         string GenerateJwtToken(User user);
+        string Encrypt(string value);
+        string Decrypt(string value);
     }
 }

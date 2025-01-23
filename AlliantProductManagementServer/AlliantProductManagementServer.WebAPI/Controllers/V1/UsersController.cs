@@ -22,5 +22,14 @@ namespace AlliantProductManagementServer.WebAPI.Controllers.V1
             var user = await Mediator.Send(command);
             return Created($"/user/{user.Id}", user);
         }
+
+        [AllowAnonymous]
+        [HttpPost("user/login")]
+        public async Task<IActionResult> LogInAsync([FromBody] LogInUserCommand command)
+        {
+            var r = Request;
+            var user = await Mediator.Send(command);
+            return Created($"/user/{user.Id}", user);
+        }
     }
 }

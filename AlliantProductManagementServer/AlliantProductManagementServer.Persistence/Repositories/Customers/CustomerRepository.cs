@@ -104,7 +104,7 @@ namespace AlliantProductManagementServer.Persistence.Repositories.Customers
         {
             try
             {
-                var reports = await _dbContext.Products
+                var reports = await _dbContext.Customers
                     .GroupBy(d => new { d.CreatedAt })
                     .Select(d => new DateReportData
                     {

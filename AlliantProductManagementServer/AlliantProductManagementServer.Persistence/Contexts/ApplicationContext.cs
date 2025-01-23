@@ -20,10 +20,11 @@ namespace AlliantProductManagementServer.Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CustomersConfig());
+            modelBuilder.ApplyConfiguration(new CustomerProductsConfig());
             modelBuilder.ApplyConfiguration(new ProductsConfig());
             modelBuilder.ApplyConfiguration(new ProductsCategoriesConfig());
             modelBuilder.ApplyConfiguration(new UsersConfig());
-            modelBuilder.SeedInitialData();
+            //modelBuilder.SeedInitialData();
 
         }
         public DbSet<Customer> Customers { get; set; } = null!;

@@ -1,5 +1,6 @@
 ﻿using AlliantProductManagementServer.Application.Security;
 using AlliantProductManagementServer.Domain.Entities.Users;
+using Jose;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,10 +13,15 @@ using System.Threading.Tasks;
 
 namespace AlliantProductManagementServer.Application.Utils
 {
-    public class JwtHandler(IConfiguration configuration) : IJwtHandler
+    public class AuthHandler : IAuthHandler
     {
-        private readonly IConfiguration _configuration = configuration;
-
+        private readonly IConfiguration _configuration;
+        private readonly byte[] _key;
+        public AuthHandler(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _key = Convert.FromBase64String(_configuration.GetValue<string>("JwtSettings:secretKey")!);
+        }
         public string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -41,6 +47,21 @@ namespace AlliantProductManagementServer.Application.Utils
             var jwt = tokenHandler.WriteToken(token);
 
             return jwt;
+        }
+        public string Encrypt(string plainText)
+        {
+            if (string.IsNullOrEmpty(plainText))
+                throw new ArgumentNullException(nameof(plainText));
+
+            return JWT.Encode(plainText, _key, JweAlgorithm.A256KW, JweEncryption.A256CBC_HS512);
+        }
+        public string Decrypt(string encryptedText)
+        {
+
+            if (string.IsNullOrEmpty(encryptedText))
+                throw new ArgumentNullException(nameof(encryptedText));
+
+            return JWT.Decode(encryptedText, _key);
         }
     }
 }

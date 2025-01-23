@@ -34,6 +34,7 @@ namespace AlliantProductManagementServer.Persistence
                 using var scope = serviceProvider.CreateScope();
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
                 context.Database.Migrate(); // Applies any pending migrations
+                Console.WriteLine($"can connect {context.Database.CanConnect()}");
             }
 
             //Inyecciones de dependencias.

@@ -1,0 +1,68 @@
+# services:
+#   postgres:
+#     image: postgres:15 # Use the latest stable PostgreSQL image
+#     container_name: alliant-db-instance
+#     restart: always
+#     environment:
+#       POSTGRES_USER: admin
+#       POSTGRES_PASSWORD: passowrd001
+#       POSTGRES_DB: alliant-db
+#     ports:
+#       - "5436:5432" # Map the container's port 5432 to your host's port 5432
+#     # volumes:
+#     #   - pgdata:/var/lib/postgresql/data # Mount a named volume for persistent storage
+
+#   api:
+#     build:
+#       context: ./alliant-product-management-web-app
+#       dockerfile: Dockerfile
+#     container_name: alliant-api
+#     restart: always
+#     # environment:
+#     #   - ASPNETCORE_ENVIRONMENT=Development  # Set the environment (Development, Staging, Production)
+#     #   - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=alliant_db;Username=admin;Password=password001
+#     ports:
+#       - "5000:8080" # Map the container's port 80 to your host's port 5000
+#     depends_on:
+#       - postgres # Ensure the PostgreSQL container starts before the API
+
+# volumes:
+#   pgdata:
+
+version: "3.9" # Use the latest version for compatibility and features
+
+services:
+  postgres:
+    container_name: alliant-manager-database
+    image: postgres:15 # Use the latest stable PostgreSQL image
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password001
+      POSTGRES_DB: alliant-db
+    ports:
+      - "5436:5432" # Map container's port 5432 to host's port 5436
+  api:
+    build:
+      context: ./AlliantProductManagementServer
+      dockerfile: dockerfile
+    container_name: alliant-manager-web-api
+    restart: always
+    ports:
+      - "5000:8080" # Map container's port 8080 to host's port 5000
+    depends_on:
+      - postgres # Ensure the PostgreSQL container starts before the API
+
+  app:
+    build:
+      context: ./alliant-product-management-web-app # Replace with the folder containing your Next.js app
+      dockerfile: dockerfile
+    container_name: alliant-manager-web-app
+    restart: always
+    ports:
+      - "3000:3000" # Map container's port 3000 to host's port 3000
+    depends_on:
+      - api # Ensure API is running before starting the Next.js app
+    environment:
+      API_URL: http://alliant-manager-web-api:8080/api/ # Use the internal Docker network to connect to the API
+      SESSION_KEY: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI=

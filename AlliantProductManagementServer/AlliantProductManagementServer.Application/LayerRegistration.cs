@@ -23,7 +23,7 @@ namespace AlliantProductManagementServer.Application
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(
                 Assembly.GetExecutingAssembly()));
 
-            services.AddScoped<IJwtHandler, JwtHandler>();
+            services.AddScoped<IAuthHandler, AuthHandler>();
 
             services.AddPersistenceLayer(configuration);
         }

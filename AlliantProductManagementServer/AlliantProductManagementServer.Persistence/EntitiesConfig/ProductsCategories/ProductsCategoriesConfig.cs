@@ -14,7 +14,7 @@ namespace AlliantProductManagementServer.Persistence.EntitiesConfig.ProductsCate
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
             builder.Property(x => x.Name).HasMaxLength(60);
-            //builder.HasQueryFilter(d => !d.IsDeleted);
+            builder.HasQueryFilter(d => !d.IsDeleted);
         }
     }
 }

@@ -1,11 +1,7 @@
-﻿using AlliantProductManagementServer.Application.Dtos.Customers;
-using AlliantProductManagementServer.Application.Dtos.Users;
+﻿using AlliantProductManagementServer.Application.Dtos.Users;
 using AlliantProductManagementServer.Application.Security;
-using AlliantProductManagementServer.Application.Utils;
-using AlliantProductManagementServer.Domain.Entities.Customers;
 using AlliantProductManagementServer.Domain.Entities.Users;
 using AlliantProductManagementServer.Domain.Exceptions;
-using AlliantProductManagementServer.Domain.Repositories.Customers;
 using AlliantProductManagementServer.Domain.Repositories.Users;
 using AutoMapper;
 using MediatR;
@@ -19,11 +15,8 @@ using System.Threading.Tasks;
 
 namespace AlliantProductManagementServer.Application.Features.Users.Handlers
 {
-    public class CreateUserCommand : IRequest<UserDto>
+    public class LogInUserCommand : IRequest<UserDto>
     {
-        [Required]
-        public string Username { get; set; } = null!;
-
         [Required]
         [EmailAddress]
         public string Email { get; set; } = null!;
@@ -31,25 +24,28 @@ namespace AlliantProductManagementServer.Application.Features.Users.Handlers
         [Required]
         public string Password { get; set; } = null!;
     }
-    public class CreateUserHandler(IUserRepository userRepository, IMapper mapper, IAuthHandler authHandler) : IRequestHandler<CreateUserCommand, UserDto>
+    public class LoginUserHandler(IUserRepository userRepository, IMapper mapper, IAuthHandler authHandler) : IRequestHandler<LogInUserCommand, UserDto>
     {
         private readonly IUserRepository _userRepository = userRepository;
         private readonly IAuthHandler _authHandler = authHandler;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(LogInUserCommand request, CancellationToken cancellationToken)
         {
-            var user = _mapper.Map<User>(request);
+            var encryptedPassword = _authHandler.Encrypt(request.Password);
 
-            var userExists = await _userRepository.GetUserByEmail(user.Email);
-            if (userExists is not null)
+            var user = await _userRepository.GetUserByEmail(request.Email);
+
+            if (user is null)
             {
-                throw new DomainException("Email already taken.", (int)HttpStatusCode.Conflict);
+                throw new DomainException("Invalid credentials", (int)HttpStatusCode.BadRequest);
             }
 
-            user.Password = _authHandler.Encrypt(user.Password);
-
-            await _userRepository.AddAsync(user);
+            var passwordIsValid = request.Password == _authHandler.Decrypt(user.Password);
+            if (!passwordIsValid)
+            {
+                throw new DomainException("Invalid credentials", (int)HttpStatusCode.BadRequest);
+            }
 
             var response = _mapper.Map<User, UserDto>(user);
 
@@ -58,4 +54,5 @@ namespace AlliantProductManagementServer.Application.Features.Users.Handlers
             return response;
         }
     }
+
 }

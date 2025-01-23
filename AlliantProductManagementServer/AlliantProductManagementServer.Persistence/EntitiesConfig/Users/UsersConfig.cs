@@ -17,7 +17,7 @@ namespace AlliantProductManagementServer.Persistence.EntitiesConfig.Users
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Username).HasMaxLength(60);
             builder.Property(x => x.Email).HasMaxLength(60);
-            builder.Property(x => x.Password).HasMaxLength(20);
+            builder.Property(x => x.Password);
             builder.HasQueryFilter(d => !d.IsDeleted);
         }
     }
