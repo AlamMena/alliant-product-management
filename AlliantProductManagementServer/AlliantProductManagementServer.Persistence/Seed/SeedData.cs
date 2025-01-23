@@ -9,26 +9,6 @@ using System.Threading.Tasks;
 
 namespace AlliantProductManagementServer.Persistence.Seed
 {
-    public static class Dates
-    {
-        public static DateTime GenerateRandomDate(int year, int month)
-        {
-            // Get the first and last day of the specified month
-            DateTime firstDayOfMonth = new DateTime(year, month, 1);
-            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-
-            // Generate a random day of the month
-            Random random = new Random();
-            int randomDay = random.Next(1, lastDayOfMonth.Day + 1);
-
-            // Create the random date
-            DateTime randomDate = new DateTime(year, month, randomDay);
-
-            return randomDate.ToUniversalTime();
-        }
-    }
-
-
     public static class SeedData
     {
 
@@ -88,22 +68,22 @@ namespace AlliantProductManagementServer.Persistence.Seed
 
             // Seed Customers
             modelBuilder.Entity<Customer>().HasData(
-                new Customer { Id = 1, Name = "John", LastName = "Doe", Identification = "123456789", PhoneNumber = "555-1234", Email = "john.doe@example.com", CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
+                new Customer { Id = 1, Name = "John", LastName = "Doe", Identification = "123456789", PhoneNumber = "555-1234", Email = "john.doe@example.com", CreatedBy = 1, CreatedAt = new DateTime(2025, 1, 17, 0, 0, 0, DateTimeKind.Utc), UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
                 new Customer { Id = 2, Name = "Jane", LastName = "Smith", Identification = "987654321", PhoneNumber = "555-9876", Email = "jane.smith@example.com", CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
                 new Customer { Id = 3, Name = "Alice", LastName = "Johnson", Identification = "112233445", PhoneNumber = "555-1122", Email = "alice.johnson@example.com", CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
-                new Customer { Id = 4, Name = "Bob", LastName = "Brown", Identification = "556677889", PhoneNumber = "555-3344", Email = "bob.brown@example.com", CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
-                new Customer { Id = 5, Name = "Charlie", LastName = "Davis", Identification = "998877665", PhoneNumber = "555-5566", Email = "charlie.davis@example.com", CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" }
+                new Customer { Id = 4, Name = "Bob", LastName = "Brown", Identification = "556677889", PhoneNumber = "555-3344", Email = "bob.brown@example.com", CreatedBy = 1, CreatedAt = new DateTime(2025, 1, 19, 0, 0, 0, DateTimeKind.Utc), UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
+                new Customer { Id = 5, Name = "Charlie", LastName = "Davis", Identification = "998877665", PhoneNumber = "555-5566", Email = "charlie.davis@example.com", CreatedBy = 1, CreatedAt = new DateTime(2025, 1, 17, 0, 0, 0, DateTimeKind.Utc), UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" }
             );
 
             // Seed Customer Products
             modelBuilder.Entity<CustomerProduct>().HasData(
                 new CustomerProduct { Id = 1, CustomerId = 1, ProductId = 1, Quantity = 2, Price = 20.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
-                new CustomerProduct { Id = 2, CustomerId = 1, ProductId = 2, Quantity = 1, Price = 15.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
+                new CustomerProduct { Id = 2, CustomerId = 1, ProductId = 2, Quantity = 1, Price = 15.0m, CreatedBy = 1, CreatedAt = new DateTime(2025, 1, 17, 0, 0, 0, DateTimeKind.Utc), UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
                 new CustomerProduct { Id = 3, CustomerId = 2, ProductId = 3, Quantity = 3, Price = 30.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
-                new CustomerProduct { Id = 4, CustomerId = 3, ProductId = 6, Quantity = 1, Price = 12.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
+                new CustomerProduct { Id = 4, CustomerId = 3, ProductId = 6, Quantity = 1, Price = 12.0m, CreatedBy = 1, CreatedAt = new DateTime(2025, 1, 17, 0, 0, 0, DateTimeKind.Utc), UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
                 new CustomerProduct { Id = 5, CustomerId = 3, ProductId = 7, Quantity = 2, Price = 18.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
                 new CustomerProduct { Id = 6, CustomerId = 4, ProductId = 10, Quantity = 4, Price = 40.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" },
-                new CustomerProduct { Id = 7, CustomerId = 5, ProductId = 15, Quantity = 3, Price = 45.0m, CreatedBy = 1, CreatedAt = createdAt, UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" }
+                new CustomerProduct { Id = 7, CustomerId = 5, ProductId = 15, Quantity = 3, Price = 45.0m, CreatedBy = 1, CreatedAt = new DateTime(2025, 1, 17, 0, 0, 0, DateTimeKind.Utc), UpdatedAt = updatedAt, IsDeleted = false, Note = "Seed data" }
             );
         }
     }

@@ -24,7 +24,7 @@ namespace AlliantProductManagementServer.Persistence.Contexts
             modelBuilder.ApplyConfiguration(new ProductsConfig());
             modelBuilder.ApplyConfiguration(new ProductsCategoriesConfig());
             modelBuilder.ApplyConfiguration(new UsersConfig());
-            //modelBuilder.SeedInitialData();
+            modelBuilder.SeedInitialData();
 
         }
         public DbSet<Customer> Customers { get; set; } = null!;

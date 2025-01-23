@@ -9,6 +9,7 @@ using AlliantProductManagementServer.Persistence.Repositories.Customers;
 using AlliantProductManagementServer.Persistence.Repositories.Products;
 using AlliantProductManagementServer.Persistence.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -24,7 +25,8 @@ namespace AlliantProductManagementServer.Persistence
         public static void AddPersistenceLayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationContext>(options =>
-                    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                    options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning))
+                    .UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                         m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)),
                 ServiceLifetime.Scoped);
 
