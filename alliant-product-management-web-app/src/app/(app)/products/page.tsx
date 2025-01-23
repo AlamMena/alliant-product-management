@@ -19,13 +19,7 @@ export default async function ProductsPage() {
         </div>
         <div className="flex space-x-4 w-full py-4">
           {[1, 2, 3].map((item) => (
-            <BalanceCard
-              key={item}
-              title="Active customers"
-              comparePercentage={10}
-              compareTitle="Compared to last month"
-              balance={20}
-            />
+            <BalanceCard key={item} />
           ))}
         </div>
         <ProductsDataTable />

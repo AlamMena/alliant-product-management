@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web App Documentation
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+This is a **Web App** built with **Next.js** and React, designed to handle customer, product, and category management with integrated reporting. The app features secure login and registration functionality, allowing users to access various pages where they can manage customers, products, and categories. Each page includes relevant reports, and customers can be associated with products, along with setting prices and quantities.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The app is containerized using Docker, with the web server running on port `3000`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Login & Register Pages**: Secure user authentication and registration.
+- **Customer Management**: Add products to customers with price and quantity management.
+- **Product & Category Management**: Administer products and categories, view related reports.
+- **Reports**: Detailed reports on customers, products, and categories.
+- **Dockerized**: The app is fully containerized using Docker for easy deployment.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technologies & Libraries Used
 
-## Learn More
+### Core Libraries
 
-To learn more about Next.js, take a look at the following resources:
+- **`@heroui/react`**: A React UI component library to help build intuitive and responsive user interfaces quickly.
+- **`@hookform/resolvers`**: Provides validation resolvers for use with React Hook Form, enabling easy form validation.
+- **`apexcharts`**: A modern charting library used to generate interactive and customizable charts for reporting.
+- **`axios`**: A promise-based HTTP client for making API requests from the client-side.
+- **`framer-motion`**: A powerful animation library that enables easy creation of animations and transitions in React applications.
+- **`from`**: A lightweight library for handling asynchronous operations and working with reactive streams.
+- **`iron-session`**: A simple session management library used for handling authentication and user sessions.
+- **`lodash`**: A utility library that provides helpful functions for working with arrays, objects, and other data types.
+- **`next`**: The framework used to build the app, offering server-side rendering, static site generation, and more.
+- **`next-themes`**: A library to handle themes in the app, allowing for dynamic theme switching.
+- **`react`**: The core JavaScript library for building the app's user interface.
+- **`react-apexcharts`**: A React wrapper for the ApexCharts library, used to render charts with React components.
+- **`react-dom`**: The React DOM package used to render the app on the web.
+- **`react-hook-form`**: A library for handling forms in React with minimal re-renders and validation.
+- **`react-toastify`**: A library for displaying toast notifications in React apps.
+- **`zod`**: A TypeScript-first schema declaration and validation library used for input validation.
+- **`zustand`**: A small and fast state management library for React, used to manage app-level state.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Docker
+- Node.js (v16 or later)

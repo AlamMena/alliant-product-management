@@ -7,14 +7,12 @@ import { revalidatePath } from "next/cache";
 
 export async function getCategories({
   page,
-  search,
   limit,
 }: {
   page: number;
   search?: string;
   limit: number;
 }) {
-  const searchParams = search?.replace(/\s/g, "") ? `&filter=${search}` : "";
   const { data } = await axiosInstance.get(
     `product/categories?page=${page ?? 1}&limit=${limit}`
   );
@@ -24,13 +22,14 @@ export async function deleteCategory(
   category: ProductCategory
 ): Promise<ApiResponse<ProductCategory>> {
   try {
-    let response: ApiResponse<ProductCategory>;
     const res = await axiosInstance.delete(`product/category/` + category.id);
-    response = res.data;
+    const response: ApiResponse<ProductCategory> = {
+      data: res.data,
+    };
     return response;
   } catch (error) {
     const parsedError = error as AxiosError;
-    let apiResponse = parsedError.response
+    const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<ProductCategory>;
     return {
       message: apiResponse.message,
@@ -61,7 +60,7 @@ export async function saveCategory(
   } catch (error) {
     console.log(error);
     const parsedError = error as AxiosError;
-    let apiResponse = parsedError.response
+    const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<ProductCategory>;
 
     return {

@@ -20,14 +20,12 @@ import {
   TableHeader,
   TableRow,
   useDisclosure,
-  User,
 } from "@heroui/react";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { debounce } from "lodash";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { array } from "zod";
 
 export const columns = [
   { name: "Id", uid: "id" },
@@ -66,7 +64,7 @@ export function SearchProductsModal() {
 
   const handleAddProduct = async () => {
     setIsLoading(true);
-    let formProducts = form.getValues("products") as CustomerProduct[];
+    const formProducts = form.getValues("products") as CustomerProduct[];
     let productsSelected = products;
 
     const allSelected = Array.from(selectedKeys ?? "")
@@ -129,7 +127,7 @@ export function SearchProductsModal() {
       debounce(async (value: string) => {
         await handleGetProducts(value);
       }, 300),
-    []
+    [handleGetProducts]
   );
 
   const onSearchChange = React.useCallback(

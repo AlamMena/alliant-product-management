@@ -1,7 +1,5 @@
-import { getCustomers } from "@/lib/customers/actions";
 import { Customer } from "@/lib/customers/types";
 import { create } from "zustand";
-// import { CoincidencePersonResponse } from "../search/types";
 
 interface State {
   customer: Customer | undefined;

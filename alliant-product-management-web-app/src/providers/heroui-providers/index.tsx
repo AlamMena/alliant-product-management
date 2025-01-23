@@ -2,7 +2,6 @@
 
 import { HeroUIProvider } from "@heroui/react";
 import { useRouter } from "next/navigation";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 // Only if using TypeScript
 declare module "@react-types/shared" {
@@ -13,17 +12,5 @@ declare module "@react-types/shared" {
   }
 }
 export function HeroProvider({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-
-  return (
-    <HeroUIProvider>
-      {/* <NextThemesProvider
-        attribute="class"
-        enableSystem={false}
-        defaultTheme="light"
-      > */}
-      {children}
-      {/* </NextThemesProvider> */}
-    </HeroUIProvider>
-  );
+  return <HeroUIProvider>{children}</HeroUIProvider>;
 }

@@ -1,7 +1,6 @@
 import { Button, Input } from "@heroui/react";
 import React from "react";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
-import { CustomerForm } from "../form";
 import { useCustomersStore } from "@/stores/customers";
 import { debounce } from "lodash";
 import { useCustomerFormStore } from "@/stores/customers/form";
@@ -17,7 +16,7 @@ export const TopContent = () => {
       debounce(async (value: string) => {
         await getCustomers({ page: 1, limit: 5, search: value });
       }, 300), // 300ms debounce delay
-    []
+    [getCustomers]
   );
 
   const onSearchChange = React.useCallback(
@@ -93,5 +92,5 @@ export const TopContent = () => {
         </div>
       </div>
     );
-  }, [filterValue, onSearchChange]);
+  }, [filterValue, onSearchChange, setOpen]);
 };

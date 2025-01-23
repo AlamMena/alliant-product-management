@@ -2,8 +2,6 @@ import { Button, Input } from "@heroui/react";
 import React from "react";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { debounce } from "lodash";
-import { useProductsStore } from "@/stores/products";
-import { useProductFormStore } from "@/stores/products/form";
 import { useProductCategoriesStore } from "@/stores/products-categories";
 import { useProductCategoriesFormStore } from "@/stores/products-categories/form";
 
@@ -94,5 +92,5 @@ export const TopContent = () => {
         </div>
       </div>
     );
-  }, [filterValue, onSearchChange]);
+  }, [filterValue, onSearchChange, setOpen, getCategories]);
 };

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -108,7 +108,6 @@ export function ProductsDataTable() {
             />
 
             <ConfirmationModal
-              title="Are you sure?"
               description={`Once this action is confirm the customer ${product.name} will be remove.`}
               onCancel={() => {}}
               onConfirm={() => handleDeleteProduct(product)}

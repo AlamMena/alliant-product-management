@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SideBar } from "@/components/sidebar";
 import { AppNavbar } from "@/components/nav";
 
 export const metadata: Metadata = {

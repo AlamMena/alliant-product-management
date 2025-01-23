@@ -5,14 +5,12 @@ import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import React, { ReactElement, useState } from "react";
 
 interface ConfirmationModalProps {
-  title: string;
   description: string;
-  triggerContent: ReactElement<any>;
+  triggerContent: ReactElement<{ onClick?: () => void }>;
   onConfirm: () => void | Promise<void>;
   onCancel?: () => void | Promise<void>;
 }
 export function ConfirmationModal({
-  title,
   description,
   triggerContent,
   onConfirm,
@@ -29,7 +27,7 @@ export function ConfirmationModal({
   return (
     <>
       {React.cloneElement(triggerContent, {
-        onPress: onOpen,
+        onClick: onOpen,
       })}
       <Modal onOpenChange={onOpenChange} isOpen={isOpen}>
         <ModalContent className="p-8">

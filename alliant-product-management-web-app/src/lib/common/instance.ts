@@ -1,11 +1,22 @@
 import axios, { AxiosError } from "axios";
 import { redirect } from "next/navigation";
+import { getSession } from "../users/actions";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:5039/api/",
+  baseURL: process.env.API_URL,
   headers: { "X-Custom-Header": "foobar" },
 });
 
+axiosInstance.interceptors.request.use(
+  async function (config) {
+    const session = await getSession();
+    config.headers.Authorization = `Bearer ${session?.token}`;
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 axiosInstance.interceptors.response.use(
   function (response) {
     return response;
@@ -13,7 +24,7 @@ axiosInstance.interceptors.response.use(
   function (error: AxiosError) {
     if (error.status === 401) {
       console.log("Unauthorized");
-      redirect("/");
+      redirect("/login");
     }
     return Promise.reject(error);
   }

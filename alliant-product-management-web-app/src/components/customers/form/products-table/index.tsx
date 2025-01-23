@@ -12,12 +12,8 @@ import {
 } from "@heroui/react";
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
-import { useCustomersStore } from "@/stores/customers";
-import { debounce } from "lodash";
-import { CustomerForm } from "..";
 import { SearchProductsModal } from "../search-products-modal";
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
-import { Product } from "@/lib/products/types";
+import { useFormContext } from "react-hook-form";
 import { CustomerProduct } from "@/lib/customers/types";
 export const columns = [
   { name: "Id", uid: "productId" },
@@ -52,7 +48,6 @@ export const CustomerProductsTable = () => {
 
   const renderCell = React.useCallback(
     (customerProduct: CustomerProduct, columnKey: React.Key) => {
-      const cellValue = customerProduct[columnKey as keyof CustomerProduct];
       const index = (form.getValues("products") as CustomerProduct[]).findIndex(
         (d) => d.productId === customerProduct.productId
       );
@@ -105,7 +100,7 @@ export const CustomerProductsTable = () => {
           );
       }
     },
-    []
+    [handleDeleteItem, form]
   );
   const loadingState = isLoading ? "loading" : "idle";
   return (
@@ -141,7 +136,7 @@ export const CustomerProductsTable = () => {
           loadingState={loadingState}
           items={customerProducts}
         >
-          {customerProducts.map((item, index) => (
+          {customerProducts.map((item) => (
             <TableRow key={item.productId}>
               {(columnKey) => (
                 <TableCell>{renderCell(item, columnKey)}</TableCell>

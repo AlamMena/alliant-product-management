@@ -1,8 +1,5 @@
 "use client";
-import { useCustomersStore } from "@/stores/customers";
-import { getCustomers } from "@/lib/customers/actions";
-import { Button, Pagination } from "@heroui/react";
-import { redirect, useRouter } from "next/navigation";
+import { Pagination } from "@heroui/react";
 import React from "react";
 
 interface TableBottomContentProps {
@@ -29,5 +26,5 @@ export const BottomContent = ({
         />
       </div>
     );
-  }, [page, pages]);
+  }, [page, pages, onPageChange]);
 };

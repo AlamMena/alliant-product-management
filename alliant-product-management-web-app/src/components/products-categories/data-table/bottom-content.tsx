@@ -1,5 +1,5 @@
 "use client";
-import { Button, Pagination } from "@heroui/react";
+import { Pagination } from "@heroui/react";
 import React from "react";
 
 interface TableBottomContentProps {
@@ -26,5 +26,5 @@ export const BottomContent = ({
         />
       </div>
     );
-  }, [page, pages]);
+  }, [page, pages, onPageChange]);
 };

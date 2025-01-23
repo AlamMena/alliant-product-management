@@ -1,24 +1,19 @@
 "use client";
-import React, { ReactElement, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Input,
   Button,
   Textarea,
-  Alert,
-  useDisclosure,
   Drawer,
   DrawerContent,
-  DrawerBody,
   Spinner,
 } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Customer, CustomerSchema } from "@/lib/customers/types";
 import z from "zod";
-import { useRouter } from "next/navigation";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { getCustomerById, saveCustomer } from "@/lib/customers/actions";
-import { toast } from "react-toastify";
 import { displayToast } from "@/components/toast";
 import { useCustomersStore } from "@/stores/customers";
 import { CustomerProductsTable } from "./products-table";

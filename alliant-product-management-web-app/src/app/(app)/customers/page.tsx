@@ -1,15 +1,11 @@
 import { Bredacrumb } from "@/components/breadcrumbs";
 import { CustomersDataTable } from "@/components/customers/data-table";
-import { CustomerForm } from "@/components/customers/form";
 import { BalanceCard } from "@/components/customers/stats/balance-card";
-import CustomersToolBar from "@/components/customers/toolbar";
 import {
   getAcquisitionsBalanceByDate,
   getAcquisitionsByDate,
-  getCustomers,
   getCustomersCreatedByDate,
 } from "@/lib/customers/actions";
-import { Button } from "@heroui/react";
 
 export default async function CustomersPage() {
   const customersCreatedByDate = await getCustomersCreatedByDate();

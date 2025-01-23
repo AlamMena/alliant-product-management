@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -8,7 +8,6 @@ import {
   TableRow,
   TableCell,
   User,
-  Chip,
   Tooltip,
   Spinner,
   Button,
@@ -18,10 +17,6 @@ import { TopContent } from "./top-content";
 import { BottomContent } from "./bottom-content";
 import { ConfirmationModal } from "@/components/common/confirmation-modal";
 import { displayToast } from "@/components/toast";
-import { useProductsStore } from "@/stores/products";
-import { Product } from "@/lib/products/types";
-import { useProductFormStore } from "@/stores/products/form";
-import { deleteProduct } from "@/lib/products/actions";
 import { useProductCategoriesFormStore } from "@/stores/products-categories/form";
 import { useProductCategoriesStore } from "@/stores/products-categories";
 import { ProductCategory } from "@/lib/products-categories/types";
@@ -72,8 +67,6 @@ export function CategoriesDataTable() {
   };
 
   const renderCell = (category: ProductCategory, columnKey: React.Key) => {
-    const cellValue = category[columnKey as keyof ProductCategory];
-
     switch (columnKey) {
       case "id":
         return <span>{category.id}</span>;
@@ -112,7 +105,6 @@ export function CategoriesDataTable() {
             />
 
             <ConfirmationModal
-              title="Are you sure?"
               description={`Once this action is confirm the customer ${category.name} will be remove.`}
               onCancel={() => {}}
               onConfirm={() => handleDeleteCategory(category)}

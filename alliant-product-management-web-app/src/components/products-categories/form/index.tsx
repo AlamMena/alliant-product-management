@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Input,
   Button,
@@ -7,23 +7,12 @@ import {
   Drawer,
   DrawerContent,
   Spinner,
-  Autocomplete,
-  AutocompleteItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
 } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import z from "zod";
-import { useRouter } from "next/navigation";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { displayToast } from "@/components/toast";
-import { Product, ProductSchema } from "@/lib/products/types";
-import { useProductsStore } from "@/stores/products";
-import { useProductFormStore } from "@/stores/products/form";
-import { getProductById, saveProduct } from "@/lib/products/actions";
 import {
   CategorySchema,
   ProductCategory,
@@ -121,7 +110,7 @@ export function CategoryForm() {
                         isRequired
                         label="Name"
                         labelPlacement="outside"
-                        placeholder="Product name"
+                        placeholder="Category name"
                         value={field.value}
                         onValueChange={field.onChange}
                         errorMessage={fieldState.error?.message}

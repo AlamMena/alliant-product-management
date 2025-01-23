@@ -9,15 +9,10 @@ import {
   Spinner,
   Autocomplete,
   AutocompleteItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
 } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import z from "zod";
-import { useRouter } from "next/navigation";
 import { Icon } from "@iconify-icon/react/dist/iconify.js";
 import { displayToast } from "@/components/toast";
 import { Product, ProductSchema } from "@/lib/products/types";
@@ -29,7 +24,6 @@ import { getCategories } from "@/lib/products-categories/actions";
 
 export function ProductForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [category, setCategory] = useState();
   const [categories, setCategories] = useState<ProductCategory[]>([]);
   const { getProducts } = useProductsStore();
   const { setOpen, isOpen, product } = useProductFormStore();

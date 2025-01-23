@@ -18,14 +18,14 @@ export async function saveCustomer(
       response = res.data;
     } else {
       const res = await axiosInstance.put(`customer`, customer);
-      console.log(customer, "res");
+      console.log("headers", axiosInstance.defaults);
       response = res.data;
       revalidatePath("/");
     }
     return response;
   } catch (error) {
     const parsedError = error as AxiosError;
-    let apiResponse = parsedError.response
+    const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<Customer>;
 
     return {
@@ -59,13 +59,14 @@ export async function deleteCustomer(
   customer: Customer
 ): Promise<ApiResponse<Customer>> {
   try {
-    let response: ApiResponse<Customer>;
     const res = await axiosInstance.delete(`customer/` + customer.id);
-    response = res.data;
+    const response: ApiResponse<Customer> = {
+      data: res.data,
+    };
     return response;
   } catch (error) {
     const parsedError = error as AxiosError;
-    let apiResponse = parsedError.response
+    const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<Customer>;
     return {
       message: apiResponse.message,

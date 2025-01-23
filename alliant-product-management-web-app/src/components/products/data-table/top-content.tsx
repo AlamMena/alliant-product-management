@@ -16,7 +16,7 @@ export const TopContent = () => {
       debounce(async (value: string) => {
         await getProducts({ page: 1, limit: 5, search: value });
       }, 300), // 300ms debounce delay
-    []
+    [getProducts]
   );
 
   const onSearchChange = React.useCallback(
@@ -92,5 +92,5 @@ export const TopContent = () => {
         </div>
       </div>
     );
-  }, [filterValue, onSearchChange]);
+  }, [filterValue, onSearchChange, setOpen, getProducts]);
 };

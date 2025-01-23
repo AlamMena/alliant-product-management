@@ -1,6 +1,6 @@
 export interface DateReport {
   title: string;
-  total: Number;
+  total: number;
   data: DateReportData[];
 }
 

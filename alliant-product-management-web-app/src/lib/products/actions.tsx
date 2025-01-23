@@ -23,7 +23,7 @@ export async function saveProduct(
   } catch (error) {
     console.log(error);
     const parsedError = error as AxiosError;
-    let apiResponse = parsedError.response
+    const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<Product>;
 
     return {
@@ -54,13 +54,14 @@ export async function deleteProduct(
   product: Product
 ): Promise<ApiResponse<Product>> {
   try {
-    let response: ApiResponse<Product>;
     const res = await axiosInstance.delete(`product/` + product.id);
-    response = res.data;
+    const response: ApiResponse<Product> = {
+      data: res.data,
+    };
     return response;
   } catch (error) {
     const parsedError = error as AxiosError;
-    let apiResponse = parsedError.response
+    const apiResponse = parsedError.response
       ?.data as unknown as ApiResponse<Product>;
     return {
       message: apiResponse.message,
