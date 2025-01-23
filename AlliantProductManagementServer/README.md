@@ -57,6 +57,3 @@ The backend is containerized using Docker, with the API running on port `5000`.
 - .NET 9 SDK
 - PostgreSQL (running in Docker)
 
-### Steps
-
-1
