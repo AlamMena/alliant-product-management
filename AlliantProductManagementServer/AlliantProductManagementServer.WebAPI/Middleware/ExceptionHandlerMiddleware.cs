@@ -12,6 +12,7 @@ namespace AlliantProductManagementServer.WebAPI.Middleware
         {
             try
             {
+                
                 await _next(context);
             }
             catch (DomainException ex)

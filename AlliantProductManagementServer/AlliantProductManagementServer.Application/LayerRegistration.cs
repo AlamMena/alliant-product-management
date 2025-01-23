@@ -1,4 +1,6 @@
-﻿using AlliantProductManagementServer.Persistence;
+﻿using AlliantProductManagementServer.Application.Security;
+using AlliantProductManagementServer.Application.Utils;
+using AlliantProductManagementServer.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -20,6 +22,8 @@ namespace AlliantProductManagementServer.Application
             // Register MediatR for implementing the mediator pattern
             services.AddMediatR(config => config.RegisterServicesFromAssemblies(
                 Assembly.GetExecutingAssembly()));
+
+            services.AddScoped<IJwtHandler, JwtHandler>();
 
             services.AddPersistenceLayer(configuration);
         }

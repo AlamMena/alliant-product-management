@@ -2,10 +2,12 @@
 using AlliantProductManagementServer.Domain.Repositories.Core;
 using AlliantProductManagementServer.Domain.Repositories.Customers;
 using AlliantProductManagementServer.Domain.Repositories.Products;
+using AlliantProductManagementServer.Domain.Repositories.Users;
 using AlliantProductManagementServer.Persistence.Contexts;
 using AlliantProductManagementServer.Persistence.Repositories.Core;
 using AlliantProductManagementServer.Persistence.Repositories.Customers;
 using AlliantProductManagementServer.Persistence.Repositories.Products;
+using AlliantProductManagementServer.Persistence.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +41,7 @@ namespace AlliantProductManagementServer.Persistence
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }
