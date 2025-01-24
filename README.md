@@ -49,5 +49,5 @@ This project is a full-stack web application that consists of a **Frontend** bui
    ```
 3. \*\* Build and run the entire stack with Docker Compose:
    ```bash
-   cd alliant-product-management
+   docker-compose up --build
    ```
